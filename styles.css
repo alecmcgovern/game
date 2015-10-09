@@ -5,11 +5,14 @@ div{
 	position:absolute;
 	z-index: -1;
 }
-
-h1{
-	padding-top: 100px;
-	text-align: center;
-	color: white;
+#canvas{
+	left: 15%;
+	height: 600px;
+	width: 70%;
+	position: absolute;
+	z-index: 0;
+	background: red;
+	opacity: 0.3;
 }
 
 #ship{
