@@ -1,0 +1,30 @@
+body{
+	background: black;
+}
+div{
+	position:absolute;
+	z-index: -1;
+}
+
+h1{
+	padding-top: 100px;
+	text-align: center;
+	color: white;
+}
+
+#ship{
+	height: 100px;
+	width: 100px;
+	background: blue;
+	left:100px;
+	z-index: 0;
+}
+
+.box{
+	background: red;
+	height: 100px;
+	width: 100px;
+	left: 400px;
+	top: 400px;
+	z-index: 0;
+}
