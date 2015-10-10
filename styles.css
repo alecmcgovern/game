@@ -1,29 +1,28 @@
 body{
 	background: black;
+	height: 600px;
 }
-div{
+div#video{
+	width: 95%;
 	position:absolute;
 	z-index: -1;
 }
-#canvas{
-	left: 15%;
-	height: 600px;
-	width: 70%;
-	position: absolute;
-	z-index: 0;
-	background: red;
-	opacity: 0.3;
+
+#awesome-drawing{
+	position: relative;
+	width: 100%;
 }
 
 #ship{
+	position: absolute;
 	height: 100px;
 	width: 100px;
-	background: blue;
 	left:100px;
-	z-index: 0;
+	z-index: 1;
 }
 
 .box{
+	position:absolute;
 	background: red;
 	height: 100px;
 	width: 100px;
