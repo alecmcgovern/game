@@ -3,30 +3,58 @@ body{
 	height: 600px;
 }
 div#video{
-	width: 95%;
+	left: 4%;
+	width: 92%;
 	position:absolute;
 	z-index: -1;
 }
-
-#awesome-drawing{
-	position: relative;
-	width: 100%;
+#ship1{
+	top: 500px;
+	left:80%;
 }
-
-#ship{
+#ship2{
+	top: 500px;
+	left:10%;
+}
+.ship{
 	position: absolute;
 	height: 100px;
 	width: 100px;
-	left:100px;
+	z-index: 1;
+
+}
+.player{
+	position: relative;
+	width: 100%;
+}
+#laser1{
+	top: 30%;
+	left: 50%;
+}
+#laser2{
+	top: 30%;
+	left: 40%;
+
+}
+.laser{
+	height: 30px;
+	width: 3px;
+	background: red;
+	position: absolute;
+	z-index: 0;
+	border: 1px solid red;
+	border-radius: 1px;
+}
+
+.alien1{ 
+	position: absolute;
+	height: 100px;
+	width: 100px;
+	left:200px;
 	z-index: 1;
 }
 
-.box{
-	position:absolute;
-	background: red;
-	height: 100px;
-	width: 100px;
-	left: 400px;
-	top: 400px;
-	z-index: 0;
+.alien{
+	position: relative;
+	width: 100%;
 }
