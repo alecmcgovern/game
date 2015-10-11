@@ -62,26 +62,25 @@ $('document').ready(function(){
 		var x = $('#ship1').position();
 		$("body").append($("<div>").addClass("laser").css({top: x.top, left: x.left + 50}));
 	}
-	setInterval(updateLaserPosition, 30);
-
-	function updateLaserPosition(){
-		$('.laser').each(function(){
-			var oldHeight = $(this).offset().top;
-			$(this).css("top", oldHeight-laser_speed);
-		});
-	}
 
 	//ship 2 laser
 	function fire2(){
 		var y = $('#ship2').position();
 		$("body").append($("<div>").addClass("laser").css({top: y.top, left: y.left + 50}));
 	}
+
+	//udate all laser positions
 	setInterval(updateLaserPosition, 30);
 
 	function updateLaserPosition(){
 		$('.laser').each(function(){
 			var oldHeight = $(this).offset().top;
-			$(this).css("top", oldHeight-laser_speed);
+			if (oldHeight>0){
+				$(this).css("top", oldHeight-laser_speed);
+			}else{
+				$(this).remove();
+			}
+
 		});
 	}
 	
