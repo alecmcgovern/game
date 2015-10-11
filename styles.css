@@ -21,7 +21,6 @@ div#video{
 	height: 100px;
 	width: 100px;
 	z-index: 1;
-
 }
 .player{
 	position: relative;
@@ -34,7 +33,6 @@ div#video{
 #laser2{
 	top: 30%;
 	left: 40%;
-
 }
 .laser{
 	height: 30px;
@@ -46,11 +44,20 @@ div#video{
 	border-radius: 1px;
 }
 
+#a1{
+	left:200px;
+}
+#a2{
+	left:300px;
+}
+#a3{
+	left:400px;
+}
+
 .alien1{ 
 	position: absolute;
 	height: 100px;
 	width: 100px;
-	left:200px;
 	z-index: 1;
 }
 
