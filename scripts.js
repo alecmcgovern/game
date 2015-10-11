@@ -51,11 +51,13 @@ $('document').ready(function(){
 	$(document).keydown(function(e){
 		e.preventDefault();
 		if (e.which === 32){
-			console.log("space");
 			fire1();
 		}
+		if (e.which === 16){
+			fire2();
+		}
 	});
-
+	//ship1 laser 
 	function fire1(){
 		var x = $('#ship1').position();
 		$("body").append($("<div>").addClass("laser").css({top: x.top, left: x.left + 50}));
@@ -68,10 +70,21 @@ $('document').ready(function(){
 			$(this).css("top", oldHeight-laser_speed);
 		});
 	}
-	
 
-	
+	//ship 2 laser
+	function fire2(){
+		var y = $('#ship2').position();
+		$("body").append($("<div>").addClass("laser").css({top: y.top, left: y.left + 50}));
+	}
+	setInterval(updateLaserPosition, 30);
 
+	function updateLaserPosition(){
+		$('.laser').each(function(){
+			var oldHeight = $(this).offset().top;
+			$(this).css("top", oldHeight-laser_speed);
+		});
+	}
+	
 
 
 });
