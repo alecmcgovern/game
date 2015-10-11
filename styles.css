@@ -2,12 +2,68 @@ body{
 	background: black;
 	height: 600px;
 }
-div#video{
-	left: 4%;
-	width: 92%;
-	position:absolute;
-	z-index: -1;
+
+/*Starting Menu*/
+#menu{
+	position: absolute;
+	top:20%;
+	left: 35%;
+	width: 30%;
+	height: 220px;
+	background: grey;
+	border: 3px solid #00ffff;
+	border-radius: 3%;
 }
+h2 {
+	font-family: 'Sigmar One';
+	text-align: center;
+	margin: 0 auto;
+	padding-top: 20px;
+}
+h3 {
+	font-family: 'Sigmar One', cursive;
+	text-align: center;
+	margin: 0 auto;
+}
+#solo:hover{
+	color: #00ff00;
+}
+#team:hover{
+	color: #00ffff;
+}
+#menuImage1{
+	margin-top: -10%;
+	margin-left: 10%;
+	width:30%;
+	/*float: left;*/
+}
+#menuImage2{
+	margin-left: 50px;
+	width: 75px;
+	/*float: right;*/
+}
+#menuImage3{
+	width: 75px;
+	/*float: right;*/
+}
+
+
+/*  audioNo is the message displayed if the audio is not browser compatible
+ *  I'm not very confident that it works -- test on IE*/
+#audioNo{ 
+	color: white;
+	top: 300px;
+}
+#audio{
+	position: absolute;
+	width: 30%;
+}
+label{
+	color: white;
+	float: right;
+}
+
+/*player ships*/
 #ship1{
 	top: 500px;
 	left:80%;
@@ -26,6 +82,8 @@ div#video{
 	position: relative;
 	width: 100%;
 }
+
+/*lasers*/
 #laser1{
 	top: 30%;
 	left: 50%;
@@ -44,14 +102,15 @@ div#video{
 	border-radius: 1px;
 }
 
+/*Alien ships*/
 #a1{
-	left:200px;
+	left:400px;
 }
 #a2{
-	left:250px;
+	left:450px;
 }
 #a3{
-	left:300px;
+	left:500px;
 }
 
 .alien1{ 

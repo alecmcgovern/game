@@ -2,8 +2,31 @@ $('document').ready(function(){
 
 
 
-	//This Code controls the movement of the ships
+	preGameState();
 
+	//This function runs through the menus before the game actually begins
+	function preGameState(){
+		$('menu').show();
+		$('#ship1').hide();
+		$('#ship2').hide();
+
+		$('#solo').on('click', function(){
+			$('#menu').hide();
+			inGameState();
+			$('#ship1').show();
+		})
+		$('#team').on('click', function(){
+			$('#menu').hide();
+			inGameState();
+			$('#ship1').show();
+			$('#ship2').show();
+		})
+	}
+
+
+	//This code is for when the user is playing the game
+	function inGameState(){
+	//This Code controls the movement of the ships
 	var speed1 = 5;
 
 
@@ -59,13 +82,11 @@ $('document').ready(function(){
 		if($('#ship2').position().left < screen.width-100) {
 			$('#ship2').finish().animate({left: "+="+speed1});
 		}
-	});
-
-	
+	});	
 
 	//This code fires the lasers
 	var laser_speed = 20;
-
+	var laser_sound = document.getElementById("lasersound");
 	$(document).keydown(function(e){
 		e.preventDefault();
 		if (e.which === 32){
@@ -79,12 +100,14 @@ $('document').ready(function(){
 	function fire1(){
 		var x = $('#ship1').position();
 		$("body").append($("<div>").addClass("laser").css({top: x.top, left: x.left + 36}));
+		laser_sound.play();
 	}
 
 	//ship 2 laser
 	function fire2(){
 		var y = $('#ship2').position();
 		$("body").append($("<div>").addClass("laser").css({top: y.top, left: y.left + 36}));
+		laser_sound.play();
 	}
 
 	//udate all laser positions
@@ -112,5 +135,16 @@ $('document').ready(function(){
 		// If touching an alien, make it dissapear and return true
 		// If not return false
 	}
+
+	// function updateAlienPosition(){
+	// 	$(.active).each(function(){
+	// 		$(this).animate()
+
+	// 	});
+	// }
+	} //end of inGameState
+	
+
+
 
 });
