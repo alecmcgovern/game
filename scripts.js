@@ -1,6 +1,13 @@
 $('document').ready(function(){
+	//Audio Setup
+	var laser_sound = document.getElementById("lasersound");
+	laser_sound.volume = 0.2;
 
+	var click = document.getElementById("click");
+		click.volume = 0.2;
 
+	var boom = document.getElementById("boom");
+		boom.volume = 0.05;
 
 	preGameState();
 
@@ -9,13 +16,19 @@ $('document').ready(function(){
 		$('menu').show();
 		$('#ship1').hide();
 		$('#ship2').hide();
+		$('.alien').each(function(){
+			$(this).hide();
+		})
+		$('#scoreboard').hide();
 
 		$('#solo').on('click', function(){
+			click.play();
 			$('#menu').hide();
 			inGameState();
 			$('#ship1').show();
 		})
 		$('#team').on('click', function(){
+			click.play();
 			$('#menu').hide();
 			inGameState();
 			$('#ship1').show();
@@ -24,12 +37,13 @@ $('document').ready(function(){
 	}
 
 
-	//This code is for when the user is playing the game
-	function inGameState(){
-
+//This code is for when the user is playing the game
+function inGameState(){	
+	$('#scoreboard').show();
+	
+	waveOne(); 
 	//This variable controls the movement of the ships
 	var speed1 = 5;
-
 
 	//This bit of code is needed to use the kd ("keydrown") attached library
 	// found at https://jeremyckahn.github.io/keydrown/
@@ -87,7 +101,6 @@ $('document').ready(function(){
 
 	//This code fires the lasers
 	var laser_speed = 20;
-	var laser_sound = document.getElementById("lasersound");
 	$(document).keydown(function(e){
 		e.preventDefault();
 		if (e.which === 32){
@@ -101,6 +114,7 @@ $('document').ready(function(){
 	function fire1(){
 		var x = $('#ship1').position();
 		$("body").append($("<div>").addClass("laser").css({top: x.top, left: x.left + 36}));
+		laser_sound.currentTime = 0;
 		laser_sound.play();
 	}
 
@@ -108,6 +122,7 @@ $('document').ready(function(){
 	function fire2(){
 		var y = $('#ship2').position();
 		$("body").append($("<div>").addClass("laser").css({top: y.top, left: y.left + 36}));
+		laser_sound.currentTime = 0;
 		laser_sound.play();
 	}
 
@@ -152,6 +167,8 @@ $('document').ready(function(){
 			var alienWidth = $(this).width();
 			if(alienPos.top <object.top && object.top < alienPos.top + alienHeight &&
 				alienPos.left< object.left && object.left<alienPos.left + alienWidth){
+					boom.currentTime=0;
+					boom.play();
 					$(this).hide();
 					score += 10;
 					var hit = true;
@@ -166,8 +183,21 @@ $('document').ready(function(){
 
 
 
-	} //end of inGameState
+} //end of inGameState
 	
+	//Wave one
+	function waveOne(){
+		$('#a1').css({left: "50px"});
+		$('#a2').css({left: "350px"});
+		$('#a3').css({left: "650px"});
+		$('.alien').each(function(){
+			$(this).show();
+		});
+		$('#a1').animate({left: "900px"}, 3000);
+		$('#a2').animate({left: "1200px"}, 3000);
+		$('#a3').animate({left: "50px"}, 3000);
+
+	}
 
 
 

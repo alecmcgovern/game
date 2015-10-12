@@ -42,7 +42,6 @@ h3 {
 }
 #menuImage3{
 	width: 75px;
-
 }
 
 /*Scoreboard*/
@@ -110,22 +109,22 @@ h3 {
 
 /*Alien ships*/
 #a1{
-	left:400px;
+
 }
 #a2{
-	left:450px;
+	
 }
 #a3{
-	left:500px;
+	
 }
 
 .alien1{ 
-	position: absolute;
-	width: 50px;
-	z-index: 1;
+	position: relative;
+	width: 100%;
 }
 
 .alien{
-	position: relative;
-	width: 100%;
+	position: absolute;
+	width: 50px;
+	z-index: 1;
 }

@@ -9,15 +9,19 @@
 
 	<!-- Audio elements -->
 	<div id="audio">
-		<audio id="spacemen" src="music_sound_effects/Spacemen.mp3" controls>
+		<audio id="spacemen" src="music_sound_effects/Spacemen.mp3">
 			<p class="audioNo">Your browser does not support the <code>audio</code> element.</p>
 		</audio>
 
 		<audio id="lasersound" src="music_sound_effects/laser_sound.wav">
 			<p class="audioNo">Your browser does not support the <code>audio</code> element.</p>
 		</audio>
+
+		<audio id="boom" src="music_sound_effects/boom.wav"></audio>
+		<audio id="click" src="music_sound_effects/click.wav"></audio>
 	</div>
 
+	<!-- Menu -->
 	<div id="menu">
 		<h2>Choose Game Type</h2>
 		<h3 id="solo">Solo</h3>
@@ -39,20 +43,19 @@
 	<div id="scoreboard">Score: <code id="score"></code></div>
 
 	<!-- Creates the first 3 aliens -->
-	<div id="a1" class="alien1 active">
-		<img class="alien" src="images/alien1.png">
+	<div id="a1" class="alien active">
+		<img class="alien1" src="images/alien1.png">
 	</div>
-	<div id="a2" class="alien1 active">
-		<img class="alien" src="images/alien1.png">
+	<div id="a2" class="alien active">
+		<img class="alien1" src="images/alien1.png">
 	</div>
-	<div id="a3" class="alien1 active">
-		<img class="alien" src="images/alien1.png">
+	<div id="a3" class="alien active">
+		<img class="alien1" src="images/alien1.png">
 	</div>
 
 
 	<!-- script links, including jquery,keydrown library found at 
 			https://jeremyckahn.github.io/keydrown/ -->
-	<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
 	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 	<script type="text/javascript" src="keydrown/keydrown.min.js"></script>
 	<script type="text/javascript" src="scripts.js"></script>
