@@ -50,8 +50,26 @@ h3 {
 	left:90%;
 	position: absolute;
 	color: white;
+	border: 1px solid #00ff00;
+	padding: 3px 10px 3px 10px;
+	border-radius:2px;
 }
 #score{
+	font-family: 'Sigmar One';
+	color: white;
+}
+
+/*Level*/
+#level{
+	font-family: 'Sigmar One';
+	left:2%;
+	position: absolute;
+	color: white;
+	border: 1px solid #00ffff;
+	padding: 3px 10px 3px 10px;
+	border-radius:2px;
+}
+#levelnumber{
 	font-family: 'Sigmar One';
 	color: white;
 }
