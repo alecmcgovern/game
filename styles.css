@@ -14,7 +14,7 @@ body{
 	border: 3px solid #00ffff;
 	border-radius: 3%;
 }
-h2 {
+#gametype {
 	font-family: 'Sigmar One';
 	text-align: center;
 	margin: 0 auto;
@@ -43,6 +43,32 @@ h3 {
 #menuImage3{
 	width: 75px;
 }
+
+/*Game over menu*/
+#gameover{
+	position: absolute;
+	top:20%;
+	left: 35%;
+	width: 30%;
+	height: 180px;
+	background: grey;
+	border: 3px solid #00ffff;
+	border-radius: 3%;
+	z-index: 3;
+}
+#endgame{
+	font-family: 'Sigmar One';
+	text-align: center;
+	margin: 0 auto;
+	padding-top: 20px;
+}
+#tryagain:hover{
+	color: #00ff00;
+}
+#mainmenu:hover{
+	color: #00ffff;
+}
+
 
 /*Scoreboard*/
 #scoreboard{

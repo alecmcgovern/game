@@ -43,11 +43,17 @@ $('document').ready(function(){
 		}
 	});
 
-
-
-
-	preGameState();
 	var numPlayers = 0;
+	var player1active = 0;
+	var player2active = 0;
+	var player1Lives = 3;
+	var player2Lives = 3;
+	var speed1 = 5;
+	var speed2 = 5;
+	var laser_speed = 20;
+	preGameState();
+	
+
 
 	//This function runs through the menu before the game actually begins
 	function preGameState(){
@@ -68,43 +74,92 @@ $('document').ready(function(){
 			click.play();
 			$('#menu').hide();
 			numPlayers = 1;
+			setup1();
 			inGameState();
-			$('#ship1').show();
-			$('.lives1').show();
 		})
 		$('#team').on('click', function(){
 			click.play();
 			$('#menu').hide();
 			numPlayers = 2;
+			setup2();
 			inGameState();
-			$('#ship1').show();
-			$('#ship2').show();
-			$('.lives1').show();
-			$('.lives2').show();
 		})
 	}
 
 
-//This code is for when the user is playing the game
-function inGameState(){	
-	$('#left').show();
-	$('#right').show();
-	$('footer').show();
-	$('#scoreboard').show();
-	$('#level').show();
-	
+	//sets up game states for one player and two player
+	function setup1(){
+		speed1 = 5;
+		player1Lives = 3;
+		player1active = 1;
+		$('#ship1').css({top: "500px", left: "80%"});
+		$('#ship1').show();
+		$('.lives1').show();
+	}
 
-	$('#levelnumber').text(1);
-	setTimeout(waveOne, 2000); 
+	function setup2(){
+		speed1 = 5;
+		speed2 = 5;
+		player1Lives = 3;
+		player2Lives = 3;
+		player1active = 1;
+		player2active = 1;
+		$('#ship1').css({top: "500px", left: "80%"});
+		$('#ship1').show();
+		$('#ship2').css({top: "500px", left: "10%"});
+		$('#ship2').show();
+		$('.lives1').show();
+		$('.lives2').show();
+	}
 
+	//This bit of code is needed to use the kd ("keydrown") attached library
+	kd.run(function () {
+ 	 	kd.tick();
+	});
 
+	//This Code controls the arrow key movement of player  one's ship
+	kd.DOWN.down(function(){
+		if($('#ship1').position().top < 540 && player1active===1) {
+			$('#ship1').finish().animate({top: "+="+speed1});
+		}
+	});
+	kd.UP.down(function(){
+		if($('#ship1').position().top > 0 && player1active===1) {
+			$('#ship1').finish().animate({top: "-="+speed1});
+		}
+	});
+	kd.LEFT.down(function(){
+		if($('#ship1').position().left > 120 && player1active===1) {
+			$('#ship1').finish().animate({left: "-="+speed1});
+		}
+	});
+	kd.RIGHT.down(function(){
+		if($('#ship1').position().left < screen.width-220 && player1active===1) {
+			$('#ship1').finish().animate({left: "+="+speed1});
+		}
+	});
 
-
-
-
-	//This variable controls the movement of the ships
-	var speed1 = 5;
-
+	//This Code controls the 'WASD' movement of player two's ship
+	kd.S.down(function(){
+		if($('#ship2').position().top < 540 && player2active===1) {
+			$('#ship2').finish().animate({top: "+="+speed2});
+		}
+	});
+	kd.W.down(function(){
+		if($('#ship2').position().top > 0 && player2active===1) {
+			$('#ship2').finish().animate({top: "-="+speed2});
+		}
+	});
+	kd.A.down(function(){
+		if($('#ship2').position().left > 120 && player2active===1) {
+			$('#ship2').finish().animate({left: "-="+speed2});
+		}
+	});
+	kd.D.down(function(){
+		if($('#ship2').position().left < screen.width-220 && player2active===1) {
+			$('#ship2').finish().animate({left: "+="+speed2});
+		}
+	});	
 
 	//updates the score
 	var score = 0;
@@ -114,62 +169,8 @@ function inGameState(){
 		$('#score').text(score);
 	}
 
-	//This bit of code is needed to use the kd ("keydrown") attached library
-	// found at https://jeremyckahn.github.io/keydrown/
-	kd.run(function () {
- 	 	kd.tick();
-	});
-
-	//This Code controls the arrow key movement of player  one's ship
-
-	kd.DOWN.down(function(){
-		if($('#ship1').position().top < 540) {
-			$('#ship1').finish().animate({top: "+="+speed1});
-		}
-	});
-	kd.UP.down(function(){
-		if($('#ship1').position().top > 0) {
-			$('#ship1').finish().animate({top: "-="+speed1});
-		}
-	});
-	kd.LEFT.down(function(){
-		if($('#ship1').position().left > 120) {
-			$('#ship1').finish().animate({left: "-="+speed1});
-		}
-	});
-	kd.RIGHT.down(function(){
-		if($('#ship1').position().left < screen.width-220) {
-			$('#ship1').finish().animate({left: "+="+speed1});
-		}
-	});
-
-
-	//This Code controls the 'WASD' movement of player two's ship
-	var speed2 = 5;
-
-	kd.S.down(function(){
-		if($('#ship2').position().top < 540) {
-			$('#ship2').finish().animate({top: "+="+speed2});
-		}
-	});
-	kd.W.down(function(){
-		if($('#ship2').position().top > 0) {
-			$('#ship2').finish().animate({top: "-="+speed1});
-		}
-	});
-	kd.A.down(function(){
-		if($('#ship2').position().left > 120) {
-			$('#ship2').finish().animate({left: "-="+speed1});
-		}
-	});
-	kd.D.down(function(){
-		if($('#ship2').position().left < screen.width-220) {
-			$('#ship2').finish().animate({left: "+="+speed1});
-		}
-	});	
 
 	//This code fires the lasers
-	var laser_speed = 20;
 	$(document).keydown(function(e){
 		e.preventDefault();
 		if (e.which === 32){
@@ -215,9 +216,6 @@ function inGameState(){
 			}
 		});
 	}
-
-
-
 
 	//Code to sense when the laser hits an alien ship
 	function checkCollision(object){
@@ -280,9 +278,6 @@ function inGameState(){
 		}
 
 		//This takes away a life when player's ship is hit
-		var player1Lives = 3;
-		var player2Lives = 3;
-
 		function player1LifeLoss () {
 			boom.play();
 			if(player1Lives===3){
@@ -306,7 +301,7 @@ function inGameState(){
 				}, 200);
 			}, 400);
 
-			setTimeout(clear, 5200);
+			setTimeout(clear, 3200);
 
 			function clear() {
 				clearInterval(handle);
@@ -339,7 +334,7 @@ function inGameState(){
 				}, 200);
 			}, 400);
 
-			setTimeout(clear2, 5200);
+			setTimeout(clear2, 3200);
 
 			function clear2() {
 				clearInterval(handle);
@@ -349,14 +344,39 @@ function inGameState(){
 		}
 
 		function gameOver() {
-
+			player1active = 0;
+			player2active = 0;
+			$('#gameover').show();
+			$('#tryagain').on('click', function(){
+				$('#gameover').hide();
+				click.play();
+				if(numPlayers===1){
+					setup1();
+					inGameState();
+				}
+				if(numPlayers===2){
+					setup2();
+					inGameState();
+				}
+			});
 		}
 
+//This code is for when the user is playing the game
+function inGameState(){	
+
+	$('#left').show();
+	$('#right').show();
+	$('footer').show();
+	$('#scoreboard').show();
+	$('#level').show();
+	$('#levelnumber').text(1);
+
+
+	setTimeout(waveOne, 2000); 
 
 
 
 } //end of inGameState
-
 
 
 //Alien waves/levels
