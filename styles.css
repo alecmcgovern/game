@@ -47,12 +47,14 @@ h3 {
 /*Scoreboard*/
 #scoreboard{
 	font-family: 'Sigmar One';
-	left:90%;
+	left:91%;
 	position: absolute;
 	color: white;
 	border: 1px solid #00ff00;
 	padding: 3px 10px 3px 10px;
 	border-radius:2px;
+	background: black;
+	z-index: 3;
 }
 #score{
 	font-family: 'Sigmar One';
@@ -62,12 +64,14 @@ h3 {
 /*Level*/
 #level{
 	font-family: 'Sigmar One';
-	left:2%;
+	left:1%;
 	position: absolute;
 	color: white;
 	border: 1px solid #00ffff;
 	padding: 3px 10px 3px 10px;
 	border-radius:2px;
+	background: black;
+	z-index: 3;
 }
 #levelnumber{
 	font-family: 'Sigmar One';
@@ -126,16 +130,6 @@ h3 {
 }
 
 /*Alien ships*/
-#a1{
-
-}
-#a2{
-	
-}
-#a3{
-	
-}
-
 .alien1{ 
 	position: relative;
 	width: 100%;
@@ -145,4 +139,67 @@ h3 {
 	position: absolute;
 	width: 50px;
 	z-index: 1;
+}
+
+#left{
+	position: absolute;
+	width:100px;
+	height: 92%;
+	border-right: 1px dashed #00ffff;
+	background: black;
+	z-index: 2;
+}
+#right{
+	position: absolute;
+	left: 90%;
+	width:100px;
+	height: 92%;
+	border-left: 1px dashed #00ff00;
+	background: black;
+	z-index: 2;
+}
+
+footer{
+	width: 100%;
+	height: 8%;
+	z-index: 3;
+	background: black;
+	position: absolute;
+	top: 92%;
+	border-top: 2px solid #00ff00;
+}
+.lives1{
+	padding-right: 20px;
+	float: right;
+	position: relative;
+	height: 80%;
+
+}
+.lives2{
+	padding-right: 20px;
+	float:left;
+	position: relative;
+	height: 80%;
+}
+
+
+#vol{
+	position: absolute;
+	left:40%;
+}
+.volcontrol{
+	display: inline;
+	font-family: 'Sigmar One';
+	position: relative;
+	color: white;
+}
+#effectsVol{
+	padding: 10px;
+	position: relative;
+	color: #00ffff;
+}
+#musicVol{
+	padding: 10px;
+	position: relative;
+	color: #00ff00;
 }

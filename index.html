@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link href='https://fonts.googleapis.com/css?family=Sigmar+One' rel='stylesheet' type='text/css'>
-	<title>Game</title>
+	<link href='https://fonts.googleapis.com/css?family=Sigmar+One' rel='stylesheet'  	type='text/css'>
+	<title>Space Invaders</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/	font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
 
 	<!-- Audio elements -->
 	<div id="audio">
-		<audio id="spacemen" src="music_sound_effects/Spacemen.mp3" >
+		<audio id="spacemen" src="music_sound_effects/Spacemen.mp3" autoplay loop="true">
 			<p class="audioNo">Your browser does not support the <code>audio</code> element.</p>
 		</audio>
 
@@ -55,6 +56,30 @@
 	<div id="a3" class="alien active">
 		<img class="alien1" src="images/alien1.png">
 	</div>
+
+	<!-- Sidebars left and right-->
+	<div id="left"></div>
+	<div id="right"></div>
+
+	<!-- Footer -->
+	<footer>
+		<img class="lives1" src="images/player1_ship.png">
+		<img class="lives1" src="images/player1_ship.png">
+		<img class="lives1" src="images/player1_ship.png">
+
+		<div id="vol">
+			<div class="volcontrol">Music 
+				<i id="musicVol" class="fa fa-volume-up fa-2x"></i>
+			</div>
+			<div class="volcontrol">
+				<i id="effectsVol" class="fa fa-volume-up fa-2x"></i>
+			 Effects</div>
+		</div>
+
+		<img class="lives2" src="images/player2_ship.png">
+		<img class="lives2" src="images/player2_ship.png">
+		<img class="lives2" src="images/player2_ship.png">
+	</footer>
 
 
 	<!-- script links, including jquery,keydrown library found at 
