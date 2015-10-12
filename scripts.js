@@ -359,6 +359,23 @@ $('document').ready(function(){
 					inGameState();
 				}
 			});
+			$('#mainmenu').on('click', function(){
+				$('#gameover').hide();
+				click.play();
+				$('.lives1').hide();
+				$('.lives2').hide();
+				$('#left').hide();
+				$('#right').hide();
+				$('#ship1').hide();
+				$('#ship2').hide();
+				$('.alien').each(function(){
+					$(this).hide();
+				})
+				$('#scoreboard').hide();
+				$('#level').hide();
+				$('#menu').show();
+				numPlayers = 0;
+			})
 		}
 
 //This code is for when the user is playing the game
