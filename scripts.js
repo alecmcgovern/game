@@ -26,7 +26,8 @@ $('document').ready(function(){
 
 	//This code is for when the user is playing the game
 	function inGameState(){
-	//This Code controls the movement of the ships
+
+	//This variable controls the movement of the ships
 	var speed1 = 5;
 
 
@@ -119,8 +120,8 @@ $('document').ready(function(){
 			if (oldHeight>0){
 				$(this).css("top", oldHeight-laser_speed);
 				var laserCoordinates = $(this).position();
-				console.log(laserCoordinates);
 				if(checkCollision(laserCoordinates)){
+					checkCollision();
 					$(this).remove();
 				}
 			}else{
@@ -128,20 +129,43 @@ $('document').ready(function(){
 			}
 		});
 	}
-	
-	//Code to sense when the laser hits a ship
-	function checkCollision(object){
-		//for each alien with class active, check laser coordinates.  
-		// If touching an alien, make it dissapear and return true
-		// If not return false
+
+
+	//updates the score
+	var score = 0;
+	setInterval(updateScore,50);	
+
+	function updateScore(){
+		$('#score').text(score);
 	}
 
-	// function updateAlienPosition(){
-	// 	$(.active).each(function(){
-	// 		$(this).animate()
 
-	// 	});
-	// }
+	//Code to sense when the laser hits an alien ship
+		//for each alien with class 'active', check coordinates.  
+		// If laser is touching the alien, make it dissapear and return true
+		// If not return false
+	function checkCollision(object){
+		var hit = null;
+		$('.active').each(function(){
+			var alienPos = $(this).position();
+			var alienHeight = $(this).height();
+			var alienWidth = $(this).width();
+			if(alienPos.top <object.top && object.top < alienPos.top + alienHeight &&
+				alienPos.left< object.left && object.left<alienPos.left + alienWidth){
+					$(this).hide();
+					score += 10;
+					var hit = true;
+			}else{
+				var hit = false;
+			}
+		})
+		return hit;
+	}
+
+
+
+
+
 	} //end of inGameState
 	
 

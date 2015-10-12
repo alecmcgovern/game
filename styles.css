@@ -21,7 +21,7 @@ h2 {
 	padding-top: 20px;
 }
 h3 {
-	font-family: 'Sigmar One', cursive;
+	font-family: 'Sigmar One';
 	text-align: center;
 	margin: 0 auto;
 }
@@ -35,16 +35,26 @@ h3 {
 	margin-top: -10%;
 	margin-left: 10%;
 	width:30%;
-	/*float: left;*/
 }
 #menuImage2{
 	margin-left: 50px;
 	width: 75px;
-	/*float: right;*/
 }
 #menuImage3{
 	width: 75px;
-	/*float: right;*/
+
+}
+
+/*Scoreboard*/
+#scoreboard{
+	font-family: 'Sigmar One';
+	left:90%;
+	position: absolute;
+	color: white;
+}
+#score{
+	font-family: 'Sigmar One';
+	color: white;
 }
 
 
@@ -57,10 +67,6 @@ h3 {
 #audio{
 	position: absolute;
 	width: 30%;
-}
-label{
-	color: white;
-	float: right;
 }
 
 /*player ships*/
