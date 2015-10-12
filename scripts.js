@@ -93,7 +93,9 @@ function inGameState(){
 	$('#scoreboard').show();
 	$('#level').show();
 	
-	waveOne(); 
+
+	$('#levelnumber').text(1);
+	setTimeout(waveOne, 2000); 
 
 
 
@@ -228,6 +230,7 @@ function inGameState(){
 				alienPos.left< object.left && object.left<alienPos.left + alienWidth){
 					boom.currentTime=0;
 					boom.play();
+					$(this).removeClass("active");
 					$(this).hide();
 					score += 10;
 					var hit = true;
@@ -238,15 +241,131 @@ function inGameState(){
 		return hit;
 	}
 
+	//This checks to see if the aliens hit either player
+		setInterval(checkDamage, 20);
+		var regenerating1 = 0;
+		var regenerating2 = 0;
+
+		function checkDamage(){
+			$('.active').each(function(){
+				var alienPos = $(this).position();
+				var alienHeight = $(this).height();
+				var alienWidth = $(this).width();
+				var player1Pos = $('#ship1').position();
+				var player2Pos = $('#ship2').position();
+				console.log("checking for damage");
+				if (player1Pos.top < alienPos.top + alienHeight  &&
+					alienPos.top  < player1Pos.top + $('#ship1').height() &&
+					player1Pos.left < alienPos.left + alienWidth &&
+					alienPos.left < player1Pos.left + $('#ship1').width()){
+						if (regenerating1===0){
+							regenerating1=1;
+							$(this).removeClass("active");
+							$(this).hide();
+							player1LifeLoss();
+						}
+				}
+				if (player2Pos.top < alienPos.top + alienHeight  &&
+					alienPos.top  < player2Pos.top + $('#ship2').height() &&
+					player2Pos.left < alienPos.left + alienWidth &&
+					alienPos.left < player2Pos.left + $('#ship2').width()){
+						if(regenerating2===0){
+							regenerating2=1;
+							$(this).removeClass("active");
+							$(this).hide();
+							player2LifeLoss();
+						}
+				}
+			});
+		}
+
+		//This takes away a life when player's ship is hit
+		var player1Lives = 3;
+		var player2Lives = 3;
+
+		function player1LifeLoss () {
+			boom.play();
+			if(player1Lives===3){
+				$('#life11').hide();
+				player1Lives=2;
+			}
+			else if(player1Lives===2){
+				$('#life12').hide();
+				player1Lives=1;
+			}
+			else if(player1Lives===1){
+				$('#life13').hide();
+				player1Lives=0;
+				gameOver();
+			}
+			$('#ship1').css('opacity', '0');
+			var handle = setInterval(function(){
+				$('#ship1').css('opacity', '1');
+				setTimeout(function(){
+					$('#ship1').css('opacity', '0');
+				}, 200);
+			}, 400);
+
+			setTimeout(clear, 5200);
+
+			function clear() {
+				clearInterval(handle);
+				$('#ship1').css('opacity', '1');
+				regenerating1 = 0;
+			}
+		}
+
+
+		function player2LifeLoss (){
+			boom.play();
+			if(player2Lives===3){
+				$('#life21').hide();
+				player2Lives=2;
+			}
+			else if(player2Lives===2){
+				$('#life22').hide();
+				player2Lives=1;
+			}
+			else if(player2Lives===1){
+				$('#life23').hide();
+				player2Lives=0;
+				gameOver();
+			}
+			$('#ship2').css('opacity', '0');
+			var handle = setInterval(function(){
+				$('#ship2').css('opacity', '1');
+				setTimeout(function(){
+					$('#ship2').css('opacity', '0');
+				}, 200);
+			}, 400);
+
+			setTimeout(clear2, 5200);
+
+			function clear2() {
+				clearInterval(handle);
+				$('#ship2').css('opacity', '1');
+				regenerating2 = 0;
+			}	
+		}
+
+		function gameOver() {
+
+		}
 
 
 
 
 } //end of inGameState
+
+
+
+//Alien waves/levels
 	
 	//Wave one
 	function waveOne(){
-		$('#levelnumber').text(1);
+		$('.alien').each(function(){
+			$(this).addClass("active")
+		})
 		$('#a1').css({left: "120px"});
 		$('#a2').css({left: "500px"});
 		$('#a3').css({left: "750px"});
@@ -256,6 +375,9 @@ function inGameState(){
 		$('#a1').animate({left: "900px"}, 3000);
 		$('#a2').animate({left: "400px"}, 3000);
 		$('#a3').animate({left: "120px"}, 3000);
+
+
+		
 
 	}
 
