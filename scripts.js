@@ -63,6 +63,7 @@ $('document').ready(function(){
 		$('#right').hide();
 		$('#ship1').hide();
 		$('#ship2').hide();
+		$('.powerups').hide();
 		$('.alien').each(function(){
 			$(this).hide();
 		})
@@ -92,7 +93,7 @@ $('document').ready(function(){
 		speed1 = 5;
 		player1Lives = 3;
 		player1active = 1;
-		$('#ship1').css({top: "500px", left: "80%"});
+		$('#ship1').css({top: "80%", left: "80%"});
 		$('#ship1').show();
 		$('.lives1').show();
 	}
@@ -104,9 +105,9 @@ $('document').ready(function(){
 		player2Lives = 3;
 		player1active = 1;
 		player2active = 1;
-		$('#ship1').css({top: "500px", left: "80%"});
+		$('#ship1').css({top: "80%", left: "80%"});
 		$('#ship1').show();
-		$('#ship2').css({top: "500px", left: "10%"});
+		$('#ship2').css({top: "80%", left: "10%"});
 		$('#ship2').show();
 		$('.lives1').show();
 		$('.lives2').show();
@@ -119,7 +120,7 @@ $('document').ready(function(){
 
 	//This Code controls the arrow key movement of player  one's ship
 	kd.DOWN.down(function(){
-		if($('#ship1').position().top < 540 && player1active===1) {
+		if($('#ship1').position().top < $('#playfield').height()-80 && player1active===1) {
 			$('#ship1').finish().animate({top: "+="+speed1});
 		}
 	});
@@ -129,19 +130,19 @@ $('document').ready(function(){
 		}
 	});
 	kd.LEFT.down(function(){
-		if($('#ship1').position().left > 120 && player1active===1) {
+		if($('#ship1').position().left > 0 && player1active===1) {
 			$('#ship1').finish().animate({left: "-="+speed1});
 		}
 	});
 	kd.RIGHT.down(function(){
-		if($('#ship1').position().left < screen.width-220 && player1active===1) {
+		if($('#ship1').position().left < $('#playfield').width()-60 && player1active===1) {
 			$('#ship1').finish().animate({left: "+="+speed1});
 		}
 	});
 
 	//This Code controls the 'WASD' movement of player two's ship
 	kd.S.down(function(){
-		if($('#ship2').position().top < 540 && player2active===1) {
+		if($('#ship2').position().top < $('#playfield').height()-80 && player2active===1) {
 			$('#ship2').finish().animate({top: "+="+speed2});
 		}
 	});
@@ -151,12 +152,12 @@ $('document').ready(function(){
 		}
 	});
 	kd.A.down(function(){
-		if($('#ship2').position().left > 120 && player2active===1) {
+		if($('#ship2').position().left > 0 && player2active===1) {
 			$('#ship2').finish().animate({left: "-="+speed2});
 		}
 	});
 	kd.D.down(function(){
-		if($('#ship2').position().left < screen.width-220 && player2active===1) {
+		if($('#ship2').position().left < $('#playfield').width()-60 && player2active===1) {
 			$('#ship2').finish().animate({left: "+="+speed2});
 		}
 	});	
@@ -185,7 +186,7 @@ $('document').ready(function(){
 	//ship1 laser 
 	function fire1(){
 		var x = $('#ship1').position();
-		$("body").append($("<div>").addClass("laser").css({top: x.top, left: x.left + 36}));
+		$("#playfield").append($("<div>").addClass("laser").css({top: x.top, left: x.left + 36}));
 		laser_sound.currentTime = 0;
 		laser_sound.play();
 	}
@@ -193,7 +194,7 @@ $('document').ready(function(){
 	//ship 2 laser
 	function fire2(){
 		var y = $('#ship2').position();
-		$("body").append($("<div>").addClass("laser").css({top: y.top, left: y.left + 36}));
+		$("#playfield").append($("<div>").addClass("laser").css({top: y.top, left: y.left + 36}));
 		laser_sound.currentTime = 0;
 		laser_sound.play();
 	}
@@ -229,7 +230,9 @@ $('document').ready(function(){
 					boom.currentTime=0;
 					boom.play();
 					$(this).removeClass("active");
-					$(this).hide();
+					$(this).stop(true).empty();
+					$(this).append("<img class='alien1' src='images/explosion.png'>");
+					$(this).fadeOut(1000);
 					score += 10;
 					var hit = true;
 			}else{
@@ -259,10 +262,13 @@ $('document').ready(function(){
 						if (regenerating1===0){
 							regenerating1=1;
 							$(this).removeClass("active");
-							$(this).hide();
+							$(this).stop(true).empty();
+							$(this).append("<img class='alien1' src='images/explosion.png'>");
+							$(this).fadeOut(1000);
 							player1LifeLoss();
 						}
 				}
+				if(numPlayers===2){
 				if (player2Pos.top < alienPos.top + alienHeight  &&
 					alienPos.top  < player2Pos.top + $('#ship2').height() &&
 					player2Pos.left < alienPos.left + alienWidth &&
@@ -271,8 +277,12 @@ $('document').ready(function(){
 							regenerating2=1;
 							$(this).removeClass("active");
 							$(this).hide();
+							$(this).stop(true).empty();
+							$(this).append("<img class='alien1' src='images/explosion.png'>");
+							$(this).fadeOut(1000);
 							player2LifeLoss();
 						}
+				}
 				}
 			});
 		}
@@ -391,33 +401,40 @@ function inGameState(){
 
 	setTimeout(waveOne, 2000); 
 
-
+	// setInterval(function(){
+	// 	$('#speed').show();
+	// }, Math.floor(Math.random() *10000));
 
 } //end of inGameState
-
 
 //Alien waves/levels
 	
 	//Wave one
 	function waveOne(){
 		$('.alien').each(function(){
+			$(this).empty();
+			$(this).append("<img class='alien1' src='images/alien1.png'>");
 			$(this).addClass("active")
 		})
-		$('#a1').css({left: "120px"});
-		$('#a2').css({left: "500px"});
-		$('#a3').css({left: "750px"});
+		$('#a1').css({left: "10%", top: "0%"});
+		$('#a2').css({left: "50%", top: "0%"});
+		$('#a3').css({left: "90%", top: "0%"});
 		$('.alien').each(function(){
 			$(this).show();
 		});
-		$('#a1').animate({left: "900px"}, 3000);
-		$('#a2').animate({left: "400px"}, 3000);
-		$('#a3').animate({left: "120px"}, 3000);
+		$('#a1').animate({left: "90%"}, 3000);
+		$('#a2').animate({left: "40%"}, 3000);
+		$('#a3').animate({left: "10%"}, 3000);
 
-
-		
-
+		$('.active').animate({top: "100%"}, 2000, function(){
+			$('.active').css("top", "0%");
+		});
+		$('.active').animate({top: "40%", left: "+=30%"}, 2000);
+		$('.active').animate({top: "100%", left: "-=30%"}, 2000, function(){
+			$('.active').css("top", "0%");
+		});
+		$('#a1').animate({left: "90%"}, 1000);
+		$('#a2').animate({left: "40%"}, 1000);
+		$('#a3').animate({left: "10%"}, 1000);
 	}
-
-
-
 });

@@ -5,10 +5,10 @@ body{
 
 /*Starting Menu*/
 #menu{
-	position: absolute;
+	position: relative;
 	top:20%;
-	left: 35%;
-	width: 30%;
+	left: 30%;
+	width: 40%;
 	height: 220px;
 	background: grey;
 	border: 3px solid #00ffff;
@@ -32,24 +32,27 @@ h3 {
 	color: #00ffff;
 }
 #menuImage1{
+	position: relative;
 	margin-top: -10%;
 	margin-left: 10%;
+	margin-right: 10%;
 	width:30%;
 }
 #menuImage2{
-	margin-left: 50px;
-	width: 75px;
+	position: relative;
+	width: 20%;
 }
 #menuImage3{
-	width: 75px;
+	position: relative;
+	width: 20%;
 }
 
 /*Game over menu*/
 #gameover{
-	position: absolute;
+	position: relative;
 	top:20%;
-	left: 35%;
-	width: 30%;
+	left: 30%;
+	width: 40%;
 	height: 180px;
 	background: grey;
 	border: 3px solid #00ffff;
@@ -72,9 +75,10 @@ h3 {
 
 /*Scoreboard*/
 #scoreboard{
+	left: 5%;
 	font-family: 'Sigmar One';
-	left:91%;
-	position: absolute;
+	width: 70%;
+	position: relative;
 	color: white;
 	border: 1px solid #00ff00;
 	padding: 3px 10px 3px 10px;
@@ -89,9 +93,10 @@ h3 {
 
 /*Level*/
 #level{
+	left: 5%;
 	font-family: 'Sigmar One';
-	left:1%;
-	position: absolute;
+	width: 70%;
+	position: relative;
 	color: white;
 	border: 1px solid #00ffff;
 	padding: 3px 10px 3px 10px;
@@ -118,17 +123,17 @@ h3 {
 
 /*player ships*/
 #ship1{
-	top: 500px;
+	top: 80%;
 	left:80%;
 }
 #ship2{
-	top: 500px;
+	top: 80%;
 	left:10%;
 }
 .ship{
 	position: absolute;
-	height: 75px;
 	width: 75px;
+	height: 75px;
 	z-index: 1;
 }
 .player{
@@ -137,14 +142,6 @@ h3 {
 }
 
 /*lasers*/
-#laser1{
-	top: 30%;
-	left: 50%;
-}
-#laser2{
-	top: 30%;
-	left: 40%;
-}
 .laser{
 	height: 30px;
 	width: 3px;
@@ -167,24 +164,47 @@ h3 {
 	z-index: 1;
 }
 
+
+
+/*divs on either side of, and including the playing field*/
 #left{
 	position: absolute;
-	width:100px;
+	width:10%;
 	height: 92%;
 	border-right: 1px dashed #00ffff;
 	background: black;
 	z-index: 2;
 }
+#playfield{
+	position: absolute;
+	left:10%;
+	height: 92%;
+	width: 80%;
+	background: black;
+}
 #right{
 	position: absolute;
 	left: 90%;
-	width:100px;
+	width:10%;
 	height: 92%;
 	border-left: 1px dashed #00ff00;
 	background: black;
 	z-index: 2;
 }
 
+/*Power-ups*/
+#speed{
+	left: 40%;
+	top:40%;
+	position: relative;
+	width: 40px;
+	height: 40px;
+	background: yellow;
+	border: 1px solid yellow;
+	border-radius: 50%;
+}
+
+/*Footer Stuff*/
 footer{
 	width: 100%;
 	height: 8%;
@@ -210,7 +230,7 @@ footer{
 
 
 #vol{
-	position: absolute;
+	position: relative;
 	left:40%;
 }
 .volcontrol{
@@ -221,11 +241,9 @@ footer{
 }
 #effectsVol{
 	padding: 10px;
-	position: relative;
 	color: #00ffff;
 }
 #musicVol{
 	padding: 10px;
-	position: relative;
 	color: #00ff00;
 }
