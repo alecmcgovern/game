@@ -164,7 +164,7 @@ $('document').ready(function(){
 
 	//updates the score
 	var score = 0;
-	setInterval(updateScore,50);	
+	setInterval(updateScore,100);	
 
 	function updateScore(){
 		$('#score').text(score);
@@ -183,24 +183,29 @@ $('document').ready(function(){
 			}
 		}
 	});
+		
 	//ship1 laser 
 	function fire1(){
-		var x = $('#ship1').position();
-		$("#playfield").append($("<div>").addClass("laser").css({top: x.top, left: x.left + 36}));
-		laser_sound.currentTime = 0;
-		laser_sound.play();
+		if(player1active===1){
+			var x = $('#ship1').position();
+			$("#playfield").append($("<div>").addClass("laser").css({top: x.top, left: x.left + 36}));
+			laser_sound.currentTime = 0;
+			laser_sound.play();
+		}
 	}
 
 	//ship 2 laser
 	function fire2(){
-		var y = $('#ship2').position();
-		$("#playfield").append($("<div>").addClass("laser").css({top: y.top, left: y.left + 36}));
-		laser_sound.currentTime = 0;
-		laser_sound.play();
+		if (player2active===1) {
+			var y = $('#ship2').position();
+			$("#playfield").append($("<div>").addClass("laser").css({top: y.top, left: y.left + 36}));
+			laser_sound.currentTime = 0;
+			laser_sound.play();
+		}
 	}
 
 	//udate all laser positions
-	setInterval(updateLaserPosition, 20);
+	setInterval(updateLaserPosition, 30);
 
 	function updateLaserPosition(){
 		$('.laser').each(function(){
@@ -243,7 +248,7 @@ $('document').ready(function(){
 	}
 
 	//This checks to see if the aliens hit either player
-		setInterval(checkDamage, 20);
+		setInterval(checkDamage, 30);
 		var regenerating1 = 0;
 		var regenerating2 = 0;
 
