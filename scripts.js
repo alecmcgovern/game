@@ -446,44 +446,49 @@ $('document').ready(function(){
 		})
 	}
 
-//This code is for when the user is playing the game
-function inGameState(){	
-	setTimeout(function(){
-		//spacemen.play();
-	}, 1000);
+	//This code is for when the user is playing the game
+	function inGameState(){	
+		setTimeout(function(){
+			//spacemen.play();
+		}, 1000);
 
-	$('#left').show();
-	$('#right').show();
-	$('footer').show();
-	$('#scoreboard').show();
-	$('#level').show();
-	$('#levelnumber').text(1);
+		$('#left').show();
+		$('#right').show();
+		$('footer').show();
+		$('#scoreboard').show();
+		$('#level').show();
+		$('#levelnumber').text(1);
 
 
-	setTimeout(waveOne, 2000); 
-} //end of inGameState
+		setTimeout(waveOne, 2000); 
+	} //end of inGameState
 
 //Alien waves/levels.  Set interval, cleared when all enemies have been defeated
 	// add health and ships to each level
 	
 	//Wave one
 	function waveOne(){
-		$('.alien').each(function(){
-			$(this).finish().empty();
-			$(this).append("<img class='alien1' src='images/alien1.png'>")
-			$(this).addClass("active");
-			$(this).addClass("oneHP");
-			$(this).addClass("twoHP");
-		})
+		setupwave1($('#a1'));
+		setupwave1($('#a2'));
+		setupwave1($('#a3'));
+
+		function setupwave1(alien){
+			alien.finish().empty();
+			alien.append("<img class='alien1' src='images/alien1.png'>")
+			alien.addClass("active");
+			alien.addClass("oneHP");
+			alien.addClass("twoHP");
+		}
+
 		$('#a1').css({left: "10%", top: "0%"});
 		$('#a2').css({left: "50%", top: "0%"});
 		$('#a3').css({left: "90%", top: "0%"});
-		$('.alien').each(function(){
+		$('.active').each(function(){
 			$(this).show();
 		});
 
 		formation1();
-		var wave1 = setInterval(formation1,7000);
+		var wave1 = setInterval(formation1,6000);
 
 		function formation1(){
 			$('#a1').animate({left: "70%"}, 3000);
@@ -511,23 +516,28 @@ function inGameState(){
 	}
 
 	function waveTwo(){
-		$('.alien').each(function(){
-			$(this).finish().empty();
-			$(this).append("<img class='alien1' src='images/alien1.png'>");
-			$(this).addClass("active");
-			$(this).addClass("oneHP");
-			$(this).addClass("twoHP");
-			$(this).addClass("threeHP");
-		});
+		setupwave2($('#a1'));
+		setupwave2($('#a2'));
+		setupwave2($('#a3'));
+
+		function setupwave2(alien){
+			alien.finish().empty();
+			alien.append("<img class='alien1' src='images/alien1.png'>");
+			alien.addClass("active");
+			alien.addClass("oneHP");
+			alien.addClass("twoHP");
+			alien.addClass("threeHP");
+		}
+
 		$('#a1').css({left: "10%", top: "0%"});
 		$('#a2').css({left: "20%", top: "0%"});
 		$('#a3').css({left: "30%", top: "0%"});
-		$('.alien').each(function(){
+		$('.active').each(function(){
 			$(this).show();
 		});
 
 		formation2();
-		var wave2 = setInterval(formation2,9000);
+		var wave2 = setInterval(formation2,7000);
 
 		function formation2(){
 			$('#a1').animate({left: "90%"}, 2000);
@@ -561,6 +571,72 @@ function inGameState(){
 	}
 
 	function waveThree(){
+		setupwave3($('#a1'));
+		setupwave3($('#a2'));
+		setupwave3($('#a3'));
+		setupwave3($('#a4'));
+		setupwave3($('#a5'));
+		setupwave3($('#a6'));
+
+		function setupwave3(alien){
+			alien.finish().empty();
+			alien.append("<img class='alien1' src='images/alien1.png'>");
+			alien.addClass("active");
+			alien.addClass("oneHP");
+			alien.addClass("twoHP");
+			alien.addClass("threeHP");
+		}
+
+		$('#a1').css({left: "10%", top: "0%"});
+		$('#a2').css({left: "20%", top: "0%"});
+		$('#a3').css({left: "30%", top: "0%"});
+		$('#a4').css({left: "70%", top: "0%"});
+		$('#a5').css({left: "80%", top: "0%"});
+		$('#a6').css({left: "90%", top: "0%"});
+		$('.active').each(function(){
+			$(this).show();
+		});
+
+		formation3();
+		var wave3 = setInterval(formation3,7000);
+
+		function formation3(){
+			$('#a1').animate({left: "20%"}, 1000);
+			$('#a2').animate({left: "30%"}, 1000);
+			$('#a3').animate({left: "70%"}, 1000);
+			$('#a4').animate({left: "40%"}, 1000);
+			$('#a5').animate({left: "50%"}, 1000);
+			$('#a6').animate({left: "60%"}, 1000);
+
+			$('.active').animate({top: "100%"}, 1500, function(){
+				$('.active').css("top", "0%");
+			});
+
+			$('#a1').animate({left: "50%", top: "40%"}, 1000);
+			$('#a2').animate({left: "10%"}, 1000);
+			$('#a3').animate({left: "30%", top: "40%"}, 1000);
+			$('#a4').animate({left: "80%"}, 1000);
+			$('#a5').animate({left: "70%", top: "40%"}, 1000);
+			$('#a6').animate({left: "90%"}, 1000);
+
+			$('.active').animate({top: "100%"}, 1500, function(){
+				$('.active').css("top", "0%");
+			});
+		}
+
+		var checkLevel3 = setInterval(function(){
+			if($('.oneHP').length<1){
+				clearInterval(wave3);
+				setTimeout(function(){
+					waveFour();
+				}, 2000);
+				clearInterval(checkLevel3);
+			}
+		},1000);
+
+	}
+
+	function waveFour(){
 
 	}
 });
