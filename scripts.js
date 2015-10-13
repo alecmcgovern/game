@@ -88,19 +88,33 @@ $('document').ready(function(){
 
 	function controlsState(){
 		$('#menu').hide();
-		$('#controls').show()
-		$('#gotit').on('click', function(){
-			click.play();
-			if (numPlayers===1){
+		$('#controls').show();
+		if (numPlayers===1){
+			$('#double').hide();
+			$('#arrowkeys').show();
+			$('#gotit').on('click', function(){
+				click.play();
 				setup1();
 				$('#controls').hide();
 				inGameState();
-			}else if (numPlayers===2){
+				
+			});
+		}else if(numPlayers===2){
+			$('#arrowkeys').hide();
+			$('#double').show();
+			$('#gotit').on('click', function(){
+				click.play();
 				setup2();
 				$('#controls').hide();
 				inGameState();
-			}
-		})
+			});
+		}
+
+		$('#back').on('click', function(){
+			$('#controls').hide();
+			click.play();
+			mainMenuState();
+		});
 	}
 
 
