@@ -1,0 +1,32 @@
+{
+  "globals": {
+    "__note": "These variables aren't actually exposed as globals.  They are defined in the modules and visible throughout the library.",
+    "define": true,
+    "module": true,
+    "util": true,
+    "kd": true,
+    "Key": true,
+    "keysDown": true,
+    "KEY_MAP": true,
+    "TRANSPOSED_KEY_MAP": true
+  },
+
+  "asi": false,
+  "boss": true,
+  "browser": true,
+  "curly": true,
+  "eqeqeq": true,
+  "eqnull": true,
+  "immed": true,
+  "lastsemic": true,
+  "latedef": true,
+  "laxbreak": true,
+  "laxcomma": true,
+  "newcap": true,
+  "noarg": true,
+  "nomen": false,
+  "plusplus": false,
+  "sub": true,
+  "undef": true,
+  "white": false
+}

@@ -1,0 +1,259 @@
+body{
+	background: black;
+	height: 600px;
+}
+
+/*Starting Menu*/
+#menu{
+	position: relative;
+	top:20%;
+	left: 30%;
+	width: 40%;
+	height: 220px;
+	background: grey;
+	border: 3px solid #00ffff;
+	border-radius: 3%;
+}
+#controls{
+	position: relative;
+	top:20%;
+	left: 30%;
+	width: 40%;
+	height: 220px;
+	background: grey;
+	border: 3px solid #00ffff;
+	border-radius: 3%;
+}
+#gotit:hover{
+	color: #00ff00;
+}
+#gotit{
+	top: 80%;
+}
+h2{
+	font-family: 'Sigmar One';
+	text-align: center;
+	margin: 0 auto;
+	padding-top: 20px;
+}
+h3 {
+	font-family: 'Sigmar One';
+	text-align: center;
+	margin: 0 auto;
+}
+#solo:hover{
+	color: #00ff00;
+}
+#team:hover{
+	color: #00ffff;
+}
+#menuImage1{
+	position: relative;
+	margin-top: -10%;
+	margin-left: 10%;
+	margin-right: 10%;
+	width:30%;
+}
+#menuImage2{
+	position: relative;
+	width: 20%;
+}
+#menuImage3{
+	position: relative;
+	width: 20%;
+}
+
+/*Game over menu*/
+#gameover{
+	position: relative;
+	top:20%;
+	left: 30%;
+	width: 40%;
+	height: 180px;
+	background: grey;
+	border: 3px solid #00ffff;
+	border-radius: 3%;
+	z-index: 3;
+}
+#tryagain:hover{
+	color: #00ff00;
+}
+#mainmenu:hover{
+	color: #00ffff;
+}
+
+
+/*Scoreboard*/
+#scoreboard{
+	left: 5%;
+	font-family: 'Sigmar One';
+	width: 70%;
+	position: relative;
+	color: white;
+	border: 1px solid #00ff00;
+	padding: 3px 10px 3px 10px;
+	border-radius:2px;
+	background: black;
+	z-index: 3;
+}
+#score{
+	font-family: 'Sigmar One';
+	color: white;
+}
+
+/*Level*/
+#level{
+	left: 5%;
+	font-family: 'Sigmar One';
+	width: 70%;
+	position: relative;
+	color: white;
+	border: 1px solid #00ffff;
+	padding: 3px 10px 3px 10px;
+	border-radius:2px;
+	background: black;
+	z-index: 3;
+}
+#levelnumber{
+	font-family: 'Sigmar One';
+	color: white;
+}
+
+
+/*  audioNo is the message displayed if the audio is not browser compatible
+ *  I'm not very confident that it works -- test on IE*/
+#audioNo{ 
+	color: white;
+	top: 300px;
+}
+#audio{
+	position: absolute;
+	width: 30%;
+}
+
+/*player ships*/
+#ship1{
+	top: 80%;
+	left:80%;
+}
+#ship2{
+	top: 80%;
+	left:10%;
+}
+.ship{
+	position: absolute;
+	width: 75px;
+	height: 75px;
+	z-index: 1;
+}
+.player{
+	position: relative;
+	width: 100%;
+}
+
+/*lasers*/
+.laser{
+	height: 30px;
+	width: 3px;
+	background: red;
+	position: absolute;
+	z-index: 0;
+	border: 1px solid red;
+	border-radius: 1px;
+}
+
+/*Alien ships*/
+.alien1{ 
+	position: relative;
+	width: 100%;
+}
+
+.alien{
+	position: absolute;
+	width: 50px;
+	z-index: 1;
+}
+
+
+
+/*divs on either side of, and including the playing field*/
+#left{
+	position: absolute;
+	width:10%;
+	height: 92%;
+	border-right: 1px dashed #00ffff;
+	background: black;
+	z-index: 2;
+}
+#playfield{
+	position: absolute;
+	left:10%;
+	height: 92%;
+	width: 80%;
+	background: black;
+}
+#right{
+	position: absolute;
+	left: 90%;
+	width:10%;
+	height: 92%;
+	border-left: 1px dashed #00ff00;
+	background: black;
+	z-index: 2;
+}
+
+/*Power-ups*/
+#speed{
+	left: 40%;
+	top:40%;
+	position: relative;
+	width: 40px;
+	height: 40px;
+	background: yellow;
+	border: 1px solid yellow;
+	border-radius: 50%;
+}
+
+/*Footer Stuff*/
+footer{
+	width: 100%;
+	height: 8%;
+	z-index: 3;
+	background: black;
+	position: absolute;
+	top: 92%;
+	border-top: 2px solid #00ff00;
+}
+.lives1{
+	padding-right: 20px;
+	float: right;
+	position: relative;
+	height: 80%;
+
+}
+.lives2{
+	padding-right: 20px;
+	float:left;
+	position: relative;
+	height: 80%;
+}
+
+
+#vol{
+	position: absolute;
+	left:40%;
+}
+.volcontrol{
+	display: inline;
+	font-family: 'Sigmar One';
+	position: relative;
+	color: white;
+}
+#effectsVol{
+	padding: 10px;
+	color: #00ffff;
+}
+#musicVol{
+	padding: 10px;
+	color: #00ff00;
+}

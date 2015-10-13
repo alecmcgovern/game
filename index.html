@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href='https://fonts.googleapis.com/css?family=Sigmar+One' rel='stylesheet'  	type='text/css'>
+	<title>Space Invaders</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/	font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+
+	<!-- Audio elements -->
+	<div id="audio">
+		<audio id="spacemen" src="music_sound_effects/Spacemen.mp3">
+			<p class="audioNo">Your browser does not support the <code>audio</code> element.</p>
+		</audio>
+
+		<audio id="lasersound" src="music_sound_effects/laser_sound.wav">
+			<p class="audioNo">Your browser does not support the <code>audio</code> element.</p>
+		</audio> 
+
+		<audio id="boom" src="music_sound_effects/boom.wav"></audio>
+		<audio id="click" src="music_sound_effects/click.wav"></audio>
+	</div>
+
+
+	<!-- Sidebar left -->
+	<div id="left" class="up">
+		<!-- Level -->
+		<div id="level">Level: <code id="levelnumber"></code></div>
+	</div>
+
+	<!-- Playing field -->
+	<div id="playfield" class="up">
+		<!-- Menu -->
+		<div id="menu">
+			<h2 id="gametype" >Choose Game Type</h2>
+			<h3 id="solo">Solo</h3>
+			<h3 id="team">Team</h3>
+			<img id="menuImage1" src="images/player1_ship.png">
+			<img id="menuImage2" src="images/player2_ship.png">
+			<img id="menuImage3" src="images/player1_ship.png">
+		</div>
+
+		<div id="controls" hidden>
+			<h2>Controls</h2>
+			<div "arrow keys"></div>
+			<i class="fa fa-caret-square-o-up"></i>
+
+			<h3 id="gotit">Got it</h3>
+		</div>
+
+		<!-- Game Over -->
+		<div id="gameover" hidden>
+			<h2 id="endgame">Game Over!</h2>
+			<h3 id="tryagain">Try Again</h3>
+			<h3 id="mainmenu">Main Menu</h3>
+		</div>
+
+		<!-- Player 1 and Player 2 ships -->
+		<div id="ship1" class="ship">
+			<img class="player" src="images/player1_ship.png">
+		</div>
+		<div id="ship2" class="ship">
+			<img class="player" src="images/player2_ship.png">
+		</div>
+
+		<!-- Creates the first 3 aliens -->
+		<div id="a1" class="alien">
+			<img class="alien1" src="images/alien1.png">
+		</div>
+		<div id="a2" class="alien">
+			<img class="alien1" src="images/alien1.png">
+		</div>
+		<div id="a3" class="alien">
+			<img class="alien1" src="images/alien1.png">
+		</div>
+
+		<!-- Power-ups -->
+		<div id="speed" class="powerups"><i class="fa fa-bolt fa-2x"></i></div>
+
+	</div>
+
+	<!-- Sidebar right-->
+	<div id="right" class="up">
+		<!-- Score -->
+		<div id="scoreboard">Score: <code id="score"></code></div>
+	</div>
+
+	<!-- Footer -->
+	<footer>
+		<img id="life11" class="lives1" src="images/player1_ship.png">
+		<img id="life12" class="lives1" src="images/player1_ship.png">
+		<img id="life13" class="lives1" src="images/player1_ship.png">
+
+		<div id="vol">
+			<div class="volcontrol">Music 
+				<i id="musicVol" class="fa fa-volume-up fa-2x"></i>
+			</div>
+			<div class="volcontrol">
+				<i id="effectsVol" class="fa fa-volume-up fa-2x"></i>
+			 Effects</div>
+		</div>
+
+		<img id="life21" class="lives2" src="images/player2_ship.png">
+		<img id="life22" class="lives2" src="images/player2_ship.png">
+		<img id="life23" class="lives2" src="images/player2_ship.png">
+	</footer>
+
+
+	<!-- script links, including jquery,keydrown library found at 
+			https://jeremyckahn.github.io/keydrown/ -->
+	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript" src="keydrown/keydrown.min.js"></script>
+	<script type="text/javascript" src="scripts.js"></script>
+
+</body>
+</html>
