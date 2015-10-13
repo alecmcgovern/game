@@ -14,7 +14,23 @@ body{
 	border: 3px solid #00ffff;
 	border-radius: 3%;
 }
-#gametype {
+#controls{
+	position: relative;
+	top:20%;
+	left: 30%;
+	width: 40%;
+	height: 220px;
+	background: grey;
+	border: 3px solid #00ffff;
+	border-radius: 3%;
+}
+#gotit:hover{
+	color: #00ff00;
+}
+#gotit{
+	top: 80%;
+}
+h2{
 	font-family: 'Sigmar One';
 	text-align: center;
 	margin: 0 auto;
@@ -58,12 +74,6 @@ h3 {
 	border: 3px solid #00ffff;
 	border-radius: 3%;
 	z-index: 3;
-}
-#endgame{
-	font-family: 'Sigmar One';
-	text-align: center;
-	margin: 0 auto;
-	padding-top: 20px;
 }
 #tryagain:hover{
 	color: #00ff00;

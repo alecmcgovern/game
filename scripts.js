@@ -4,13 +4,13 @@ $('document').ready(function(){
 	spacemen.volume = 1.0;
 
 	var laser_sound = document.getElementById("lasersound");
-	laser_sound.volume = 0.2;
+	laser_sound.volume = 0.4;
 
 	var click = document.getElementById("click");
-	click.volume = 0.2;
+	click.volume = 0.4;
 
 	var boom = document.getElementById("boom");
-	boom.volume = 0.05;
+	boom.volume = 0.15;
 
 	var effects_volume = 1;
 	var music_volume = 1;
@@ -51,12 +51,12 @@ $('document').ready(function(){
 	var speed1 = 5;
 	var speed2 = 5;
 	var laser_speed = 20;
-	preGameState();
+	mainMenuState();
 	
 
 
 	//This function runs through the menu before the game actually begins
-	function preGameState(){
+	function mainMenuState(){
 		$('.lives1').hide();
 		$('.lives2').hide();
 		$('#left').hide();
@@ -73,17 +73,30 @@ $('document').ready(function(){
 
 		$('#solo').on('click', function(){
 			click.play();
-			$('#menu').hide();
 			numPlayers = 1;
-			setup1();
-			inGameState();
+			controlsState();
 		})
 		$('#team').on('click', function(){
 			click.play();
-			$('#menu').hide();
 			numPlayers = 2;
-			setup2();
-			inGameState();
+			controlsState();
+		})
+	}
+
+	function controlsState(){
+		$('#menu').hide();
+		$('#controls').show()
+		$('#gotit').on('click', function(){
+			click.play();
+			if (numPlayers===1){
+				setup1();
+				$('#controls').hide();
+				inGameState();
+			}else if (numPlayers===2){
+				setup2();
+				$('#controls').hide();
+				inGameState();
+			}
 		})
 	}
 
@@ -316,7 +329,7 @@ $('document').ready(function(){
 				}, 200);
 			}, 400);
 
-			setTimeout(clear, 3200);
+			setTimeout(clear, 2000);
 
 			function clear() {
 				clearInterval(handle);
@@ -349,7 +362,7 @@ $('document').ready(function(){
 				}, 200);
 			}, 400);
 
-			setTimeout(clear2, 3200);
+			setTimeout(clear2, 2000);
 
 			function clear2() {
 				clearInterval(handle);
@@ -395,6 +408,9 @@ $('document').ready(function(){
 
 //This code is for when the user is playing the game
 function inGameState(){	
+	setTimeout(function(){
+		//spacemen.play();
+	}, 1000);
 
 	$('#left').show();
 	$('#right').show();
@@ -441,5 +457,9 @@ function inGameState(){
 		$('#a1').animate({left: "90%"}, 1000);
 		$('#a2').animate({left: "40%"}, 1000);
 		$('#a3').animate({left: "10%"}, 1000);
+	}
+
+	function waveTwo(){
+
 	}
 });
