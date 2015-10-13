@@ -12,6 +12,9 @@ $('document').ready(function(){
 	var boom = document.getElementById("boom");
 	boom.volume = 0.15;
 
+	var hit = document.getElementById("hit");
+	hit.volume = 0.2;
+
 	var effects_volume = 1;
 	var music_volume = 1;
 
@@ -238,31 +241,36 @@ $('document').ready(function(){
 
 	//Code to sense when the laser hits an alien ship
 	function checkCollision(object){
-		var hit = null;
-		// for (var i = 0; i< $('.active').length; i++){
-
-		// }
+		var isHit = null;
 		$('.active').each(function(){
 			var alienPos = $(this).position();
 			var alienHeight = $(this).height();
 			var alienWidth = $(this).width();
 			if(alienPos.top <object.top && object.top < alienPos.top + alienHeight &&
 				alienPos.left< object.left && object.left<alienPos.left + alienWidth){
-					boom.currentTime=0;
-					boom.play();
-					$(this).removeClass("active");
-					$(this).stop(true).empty();
-					$(this).append("<img class='alien1' src='images/explosion.png'>");
-					$(this).fadeOut(1000);
-					score += 10;
-					hit =  true;
-					return false;
+					if($(this).hasClass("oneHP")){
+						hit.currentTime=0;
+						hit.play();
+						$(this).removeClass("oneHP");
+						isHit = true;
+						return false;
+					} else {
+						boom.currentTime=0;
+						boom.play();
+						$(this).removeClass("active");
+						$(this).stop(true).empty();
+						$(this).append("<img class='alien1' src='images/explosion.png'>");
+						$(this).fadeOut(1000);
+						score += 10;
+						isHit =  true;
+						return false;
+
+					}
 			}else{
-				hit =  false;
+				isHit =  false;
 			}
-			//return hit;
 		})
-		return hit;
+		return isHit;
 	}
 
 	//This checks to see if the aliens hit either player
@@ -435,7 +443,8 @@ function inGameState(){
 		$('.alien').each(function(){
 			$(this).empty();
 			$(this).append("<img class='alien1' src='images/alien1.png'>");
-			$(this).addClass("active")
+			$(this).addClass("active");
+			$(this).addClass("oneHP");
 		})
 		$('#a1').css({left: "10%", top: "0%"});
 		$('#a2').css({left: "50%", top: "0%"});
