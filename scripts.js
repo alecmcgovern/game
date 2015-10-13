@@ -226,8 +226,8 @@ $('document').ready(function(){
 			if (oldHeight>0){
 				$(this).css("top", oldHeight-laser_speed);
 				var laserCoordinates = $(this).position();
-				if(checkCollision(laserCoordinates)){
-					checkCollision();
+				var collided = checkCollision(laserCoordinates);
+				if(collided){
 					$(this).remove();
 				}
 			}else{
@@ -239,6 +239,9 @@ $('document').ready(function(){
 	//Code to sense when the laser hits an alien ship
 	function checkCollision(object){
 		var hit = null;
+		// for (var i = 0; i< $('.active').length; i++){
+
+		// }
 		$('.active').each(function(){
 			var alienPos = $(this).position();
 			var alienHeight = $(this).height();
@@ -252,10 +255,12 @@ $('document').ready(function(){
 					$(this).append("<img class='alien1' src='images/explosion.png'>");
 					$(this).fadeOut(1000);
 					score += 10;
-					var hit = true;
+					hit =  true;
+					return false;
 			}else{
-				var hit = false;
+				hit =  false;
 			}
+			//return hit;
 		})
 		return hit;
 	}
@@ -272,7 +277,6 @@ $('document').ready(function(){
 				var alienWidth = $(this).width();
 				var player1Pos = $('#ship1').position();
 				var player2Pos = $('#ship2').position();
-				console.log("checking for damage");
 				if (player1Pos.top < alienPos.top + alienHeight  &&
 					alienPos.top  < player1Pos.top + $('#ship1').height() &&
 					player1Pos.left < alienPos.left + alienWidth &&
@@ -421,14 +425,10 @@ function inGameState(){
 
 
 	setTimeout(waveOne, 2000); 
-
-	// setInterval(function(){
-	// 	$('#speed').show();
-	// }, Math.floor(Math.random() *10000));
-
 } //end of inGameState
 
-//Alien waves/levels
+//Alien waves/levels.  Set interval, cleared when all enemies have been defeated
+	// add health and ships to each level
 	
 	//Wave one
 	function waveOne(){
