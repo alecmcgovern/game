@@ -508,6 +508,7 @@ $('document').ready(function(){
 			if($('.oneHP').length<1){
 				clearInterval(wave1);
 				setTimeout(function(){
+					$('active').finish();
 					waveTwo();
 				}, 2000);
 				clearInterval(checkLevel1);
@@ -516,6 +517,8 @@ $('document').ready(function(){
 	}
 
 	function waveTwo(){
+		$('#levelnumber').text(2);
+
 		setupwave2($('#a1'));
 		setupwave2($('#a2'));
 		setupwave2($('#a3'));
@@ -563,6 +566,7 @@ $('document').ready(function(){
 			if($('.oneHP').length<1){
 				clearInterval(wave2);
 				setTimeout(function(){
+					$('active').finish();
 					waveThree();
 				}, 2000);
 				clearInterval(checkLevel2);
@@ -571,6 +575,7 @@ $('document').ready(function(){
 	}
 
 	function waveThree(){
+		$('#levelnumber').text(3);
 		setupwave3($('#a1'));
 		setupwave3($('#a2'));
 		setupwave3($('#a3'));
@@ -628,7 +633,8 @@ $('document').ready(function(){
 			if($('.oneHP').length<1){
 				clearInterval(wave3);
 				setTimeout(function(){
-					waveFour();
+					$('active').finish();
+					youWin();
 				}, 2000);
 				clearInterval(checkLevel3);
 			}
@@ -637,6 +643,60 @@ $('document').ready(function(){
 	}
 
 	function waveFour(){
+
+	}
+		
+		$('#mainmenu').on('click', function(){
+			$('#gameover').hide();
+			click.play();
+			$('.lives1').hide();
+			$('.lives2').hide();
+			$('#left').hide();
+			$('#right').hide();
+			$('#ship1').hide();
+			$('#ship2').hide();
+			$('.alien').each(function(){
+				$(this).hide();
+			})
+			$('#scoreboard').hide();
+			$('#level').hide();
+			$('#menu').show();
+			numPlayers = 0;
+		})
+
+	function youWin(){
+		player1active = 0;
+		player2active = 0;
+		$('#youwin').show();
+		$('#replay').on('click', function(){
+			$('#youwin').hide();
+			click.play();
+			if(numPlayers===1){
+				setup1();
+				inGameState();
+			}
+			if(numPlayers===2){
+				setup2();
+				inGameState();
+			}
+		});
+		$('#tomenu').on('click', function(){
+			$('#youwin').hide();
+			click.play();
+			$('.lives1').hide();
+			$('.lives2').hide();
+			$('#left').hide();
+			$('#right').hide();
+			$('#ship1').hide();
+			$('#ship2').hide();
+			$('.alien').each(function(){
+				$(this).hide();
+			})
+			$('#scoreboard').hide();
+			$('#level').hide();
+			$('#menu').show();
+			numPlayers = 0;
+		})
 
 	}
 });

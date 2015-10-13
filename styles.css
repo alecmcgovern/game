@@ -107,6 +107,25 @@ h3 {
 	color: #00ffff;
 }
 
+#youwin{
+	position: relative;
+	top: 20%;
+	left: 30%;
+	width: 40%;
+	height: 180px;
+	background: grey;
+	border: 3px solid #00ffff;
+	border-radius: 3%;
+	z-index: 3;
+}
+
+#replay:hover{
+	color: #00ff00;
+}
+#tomenu:hover{
+	color: #00ffff;
+}
+
 
 /*Scoreboard*/
 #scoreboard{
