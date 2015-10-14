@@ -94,7 +94,6 @@ $('document').ready(function(){
 			$('#arrowkeys').show();
 			$('#gotit').on('click', function(){
 				click.play();
-				setup1();
 				$('#controls').hide();
 				inGameState();
 				
@@ -104,7 +103,6 @@ $('document').ready(function(){
 			$('#double').show();
 			$('#gotit').on('click', function(){
 				click.play();
-				setup2();
 				$('#controls').hide();
 				inGameState();
 			});
@@ -120,21 +118,25 @@ $('document').ready(function(){
 
 	//sets up game states for one player and two player
 	function setup1(){
+		score = 0;
 		speed1 = 5;
 		player1Lives = 3;
 		player1active = 1;
+		$('.alien').removeClass("active oneHP twoHP threeHP")
 		$('#ship1').css({top: "80%", left: "80%"});
 		$('#ship1').show();
 		$('.lives1').show();
 	}
 
 	function setup2(){
+		score = 0;
 		speed1 = 5;
 		speed2 = 5;
 		player1Lives = 3;
 		player2Lives = 3;
 		player1active = 1;
 		player2active = 1;
+		$('.alien').removeClass("active oneHP twoHP threeHP")
 		$('#ship1').css({top: "80%", left: "80%"});
 		$('#ship1').show();
 		$('#ship2').css({top: "80%", left: "10%"});
@@ -275,23 +277,16 @@ $('document').ready(function(){
 						isHit = true;
 						return false;
 					}else if($(this).hasClass("oneHP")){
-						hit.currentTime=0;
-						hit.play();
-						$(this).removeClass("oneHP");
-						isHit = true;
-						return false;
-					} else {
 						boom.currentTime=0;
 						boom.play();
-						$(this).removeClass("active");
+						$(this).removeClass("oneHP active");
 						$(this).stop(true).empty();
 						$(this).append("<img class='alien1' src='images/explosion.png'>");
 						$(this).fadeOut(1000);
 						score += 10;
 						isHit =  true;
 						return false;
-
-					}
+					} 
 			}else{
 				isHit =  false;
 			}
@@ -317,8 +312,7 @@ $('document').ready(function(){
 				alienPos.left < player1Pos.left + $('#ship1').width()){
 					if (regenerating1===0){
 						regenerating1=1;
-						$(this).removeClass("active");
-						$(this).removeClass("oneHP");
+						$(this).removeClass("active oneHP twoHP threeHP");																							
 						$(this).stop(true).empty();
 						$(this).append("<img class='alien1' src='images/explosion.png'>");
 						$(this).fadeOut(1000);
@@ -332,8 +326,7 @@ $('document').ready(function(){
 					alienPos.left < player2Pos.left + $('#ship2').width()){
 						if(regenerating2===0){
 							regenerating2=1;
-							$(this).removeClass("active");
-							$(this).removeClass("oneHP");
+							$(this).removeClass("active oneHP twoHP threeHP");
 							$(this).hide();
 							$(this).stop(true).empty();
 							$(this).append("<img class='alien1' src='images/explosion.png'>");
@@ -411,45 +404,16 @@ $('document').ready(function(){
 		}	
 	}
 
-	function gameOver() {
-		player1active = 0;
-		player2active = 0;
-		$('#gameover').show();
-		$('#tryagain').on('click', function(){
-			$('#gameover').hide();
-			click.play();
-			if(numPlayers===1){
-				setup1();
-				inGameState();
-			}
-			if(numPlayers===2){
-				setup2();
-				inGameState();
-			}
-		});
-		$('#mainmenu').on('click', function(){
-			$('#gameover').hide();
-			click.play();
-			$('.lives1').hide();
-			$('.lives2').hide();
-			$('#left').hide();
-			$('#right').hide();
-			$('#ship1').hide();
-			$('#ship2').hide();
-			$('.alien').each(function(){
-				$(this).hide();
-			})
-			$('#scoreboard').hide();
-			$('#level').hide();
-			$('#menu').show();
-			numPlayers = 0;
-		})
-	}
 
 	//This code is for when the user is playing the game
 	function inGameState(){	
+		if (numPlayers===1){
+			setup1();
+		}else if(numPlayers===2){
+			setup2();
+		}
 		setTimeout(function(){
-			//spacemen.play();
+			spacemen.play();
 		}, 1000);
 
 		$('#left').show();
@@ -460,7 +424,7 @@ $('document').ready(function(){
 		$('#levelnumber').text(1);
 
 
-		setTimeout(waveOne, 2000); 
+		setTimeout(waveOne, 100); 
 	} //end of inGameState
 
 //Alien waves/levels.  Set interval, cleared when all enemies have been defeated
@@ -475,9 +439,7 @@ $('document').ready(function(){
 		function setupwave1(alien){
 			alien.finish().empty();
 			alien.append("<img class='alien1' src='images/alien1.png'>")
-			alien.addClass("active");
-			alien.addClass("oneHP");
-			alien.addClass("twoHP");
+			alien.addClass("active oneHP twoHP");
 		}
 
 		$('#a1').css({left: "10%", top: "0%"});
@@ -488,19 +450,19 @@ $('document').ready(function(){
 		});
 
 		formation1();
-		var wave1 = setInterval(formation1,6000);
+		var wave1 = setInterval(formation1,7000);
 
 		function formation1(){
 			$('#a1').animate({left: "70%"}, 3000);
 			$('#a2').animate({left: "40%"}, 3000);
 			$('#a3').animate({left: "10%"}, 3000);
 
-			$('.active').animate({top: "100%"}, 2000, function(){
-				$('.active').css("top", "0%");
+			$('.oneHP').animate({top: "100%"}, 2000, function(){
+				$('.oneHP').css("top", "0%");
 			});
-			$('.active').animate({top: "40%", left: "+=30%"}, 2000);
-			$('.active').animate({top: "100%", left: "-=30%"}, 2000, function(){
-				$('.active').css("top", "0%");
+			$('.oneHP').animate({top: "40%", left: "+=30%"}, 2000);
+			$('.oneHP').animate({top: "100%", left: "-=30%"}, 2000, function(){
+				$('.oneHP').css("top", "0%");
 			});
 		}
 
@@ -508,17 +470,16 @@ $('document').ready(function(){
 			if($('.oneHP').length<1){
 				clearInterval(wave1);
 				setTimeout(function(){
-					$('active').finish();
+					$('.alien').removeClass("active oneHP twoHP threeHP");
 					waveTwo();
 				}, 2000);
 				clearInterval(checkLevel1);
 			}
-		},500);
+		},100);
 	}
 
 	function waveTwo(){
 		$('#levelnumber').text(2);
-
 		setupwave2($('#a1'));
 		setupwave2($('#a2'));
 		setupwave2($('#a3'));
@@ -526,16 +487,13 @@ $('document').ready(function(){
 		function setupwave2(alien){
 			alien.finish().empty();
 			alien.append("<img class='alien1' src='images/alien1.png'>");
-			alien.addClass("active");
-			alien.addClass("oneHP");
-			alien.addClass("twoHP");
-			alien.addClass("threeHP");
+			alien.addClass("active oneHP twoHP threeHP");
 		}
 
 		$('#a1').css({left: "10%", top: "0%"});
 		$('#a2').css({left: "20%", top: "0%"});
 		$('#a3').css({left: "30%", top: "0%"});
-		$('.active').each(function(){
+		$('.oneHP').each(function(){
 			$(this).show();
 		});
 
@@ -547,124 +505,107 @@ $('document').ready(function(){
 			$('#a2').animate({left: "80%"}, 2000);
 			$('#a3').animate({left: "70%"}, 2000);
 
-			$('.active').animate({top: "100%"}, 1500, function(){
-				$('.active').css("top", "0%");
+			$('.oneHP').animate({top: "100%"}, 1500, function(){
+				$('.oneHP').css("top", "0%");
 			});
 
 			$('#a1').animate({left: "40%"}, 2000);
 			$('#a2').animate({left: "50%"}, 2000);
 			$('#a3').animate({left: "60%"}, 2000);
 
-			$('.active').animate({top: "20%", left: "+=20%"}, 800);
-			$('.active').animate({top: "40%", left: "-=20%"}, 800);
-			$('.active').animate({top: "60%", left: "+=20%"}, 800);
-			$('.active').animate({top: "100%"}, 500, function(){
-				$('.active').css("top", "0%");
+			$('.oneHP').animate({top: "20%", left: "+=20%"}, 800);
+			$('.oneHP').animate({top: "40%", left: "-=20%"}, 800);
+			$('.oneHP').animate({top: "60%", left: "+=20%"}, 800);
+			$('.oneHP').animate({top: "100%"}, 500, function(){
+				$('.oneHP').css("top", "0%");
 			});
 		}
 		var checkLevel2 = setInterval(function(){
 			if($('.oneHP').length<1){
 				clearInterval(wave2);
 				setTimeout(function(){
-					$('active').finish();
-					waveThree();
+					$('.alien').removeClass("active oneHP twoHP threeHP");
+					youWin();
 				}, 2000);
 				clearInterval(checkLevel2);
 			}
 		},1000);
 	}
 
-	function waveThree(){
-		$('#levelnumber').text(3);
-		setupwave3($('#a1'));
-		setupwave3($('#a2'));
-		setupwave3($('#a3'));
-		setupwave3($('#a4'));
-		setupwave3($('#a5'));
-		setupwave3($('#a6'));
+	// function waveThree(){
+	// 	$('#levelnumber').text(3);
+	// 	$('.active').finish();
+	// 	setupwave3($('#a1'));
+	// 	setupwave3($('#a2'));
+	// 	setupwave3($('#a3'));
+	// 	setupwave3($('#a4'));
+	// 	setupwave3($('#a5'));
+	// 	setupwave3($('#a6'));
 
-		function setupwave3(alien){
-			alien.finish().empty();
-			alien.append("<img class='alien1' src='images/alien1.png'>");
-			alien.addClass("active");
-			alien.addClass("oneHP");
-			alien.addClass("twoHP");
-			alien.addClass("threeHP");
-		}
+	// 	function setupwave3(alien){
+	// 		alien.finish().empty();
+	// 		alien.append("<img class='alien1' src='images/alien1.png'>");
+	// 		alien.addClass("active");
+	// 		alien.addClass("oneHP");
+	// 		alien.addClass("twoHP");
+	// 		alien.addClass("threeHP");
+	// 	}
 
-		$('#a1').css({left: "10%", top: "0%"});
-		$('#a2').css({left: "20%", top: "0%"});
-		$('#a3').css({left: "30%", top: "0%"});
-		$('#a4').css({left: "70%", top: "0%"});
-		$('#a5').css({left: "80%", top: "0%"});
-		$('#a6').css({left: "90%", top: "0%"});
-		$('.active').each(function(){
-			$(this).show();
-		});
+	// 	$('#a1').css({left: "10%", top: "0%"});
+	// 	$('#a2').css({left: "20%", top: "0%"});
+	// 	$('#a3').css({left: "30%", top: "0%"});
+	// 	$('#a4').css({left: "70%", top: "0%"});
+	// 	$('#a5').css({left: "80%", top: "0%"});
+	// 	$('#a6').css({left: "90%", top: "0%"});
+	// 	$('.active').each(function(){
+	// 		$(this).show();
+	// 	});
 
-		formation3();
-		var wave3 = setInterval(formation3,7000);
+	// 	formation3();
+	// 	var wave3 = setInterval(formation3,7000);
 
-		function formation3(){
-			$('#a1').animate({left: "20%"}, 1000);
-			$('#a2').animate({left: "30%"}, 1000);
-			$('#a3').animate({left: "70%"}, 1000);
-			$('#a4').animate({left: "40%"}, 1000);
-			$('#a5').animate({left: "50%"}, 1000);
-			$('#a6').animate({left: "60%"}, 1000);
+	// 	function formation3(){
+	// 		$('#a1').animate({left: "20%"}, 1000);
+	// 		$('#a2').animate({left: "30%"}, 1000);
+	// 		$('#a3').animate({left: "70%"}, 1000);
+	// 		$('#a4').animate({left: "40%"}, 1000);
+	// 		$('#a5').animate({left: "50%"}, 1000);
+	// 		$('#a6').animate({left: "60%"}, 1000);
 
-			$('.active').animate({top: "100%"}, 1500, function(){
-				$('.active').css("top", "0%");
-			});
+	// 		$('.active').animate({top: "100%"}, 1500, function(){
+	// 			$('.active').css("top", "0%");
+	// 		});
 
-			$('#a1').animate({left: "50%", top: "40%"}, 1000);
-			$('#a2').animate({left: "10%"}, 1000);
-			$('#a3').animate({left: "30%", top: "40%"}, 1000);
-			$('#a4').animate({left: "80%"}, 1000);
-			$('#a5').animate({left: "70%", top: "40%"}, 1000);
-			$('#a6').animate({left: "90%"}, 1000);
+	// 		$('#a1').animate({left: "50%", top: "40%"}, 1000);
+	// 		$('#a2').animate({left: "10%"}, 1000);
+	// 		$('#a3').animate({left: "30%", top: "40%"}, 1000);
+	// 		$('#a4').animate({left: "80%"}, 1000);
+	// 		$('#a5').animate({left: "70%", top: "40%"}, 1000);
+	// 		$('#a6').animate({left: "90%"}, 1000);
 
-			$('.active').animate({top: "100%"}, 1500, function(){
-				$('.active').css("top", "0%");
-			});
-		}
+	// 		$('.active').animate({top: "100%"}, 1500, function(){
+	// 			$('.active').css("top", "0%");
+	// 		});
+	// 	}
 
-		var checkLevel3 = setInterval(function(){
-			if($('.oneHP').length<1){
-				clearInterval(wave3);
-				setTimeout(function(){
-					$('active').finish();
-					youWin();
-				}, 2000);
-				clearInterval(checkLevel3);
-			}
-		},1000);
+	// 	var checkLevel3 = setInterval(function(){
+	// 		if($('.oneHP').length<1){
+	// 			clearInterval(wave3);
+	// 			setTimeout(function(){
+	// 				$('.active').finish();
+	// 				youWin();
+	// 			}, 2000);
+	// 			clearInterval(checkLevel3);
+	// 		}
+	// 	},1000);
 
-	}
+	// }
 
-	function waveFour(){
-
-	}
-		
-		$('#mainmenu').on('click', function(){
-			$('#gameover').hide();
-			click.play();
-			$('.lives1').hide();
-			$('.lives2').hide();
-			$('#left').hide();
-			$('#right').hide();
-			$('#ship1').hide();
-			$('#ship2').hide();
-			$('.alien').each(function(){
-				$(this).hide();
-			})
-			$('#scoreboard').hide();
-			$('#level').hide();
-			$('#menu').show();
-			numPlayers = 0;
-		})
 
 	function youWin(){
+		$('.alien').hide();
+		$('.alien').finish();
+		$('.alien').removeClass('active oneHP twoHP threeHP');
 		player1active = 0;
 		player2active = 0;
 		$('#youwin').show();
@@ -697,6 +638,43 @@ $('document').ready(function(){
 			$('#menu').show();
 			numPlayers = 0;
 		})
-
+	}
+	//you lose
+	function gameOver() {
+		$('.alien').hide();
+		$('.alien').finish();
+		$('.alien').removeClass("active oneHP twoHP threeHP");
+		player1active = 0;
+		player2active = 0;
+		$('#gameover').show();
+		$('#tryagain').on('click', function(){
+			$('#gameover').hide();
+			click.play();
+			if(numPlayers===1){
+				setup1();
+				inGameState();
+			}
+			if(numPlayers===2){
+				setup2();
+				inGameState();
+			}
+		});
+		$('#mainmenu').on('click', function(){
+			$('#gameover').hide();
+			click.play();
+			$('.lives1').hide();
+			$('.lives2').hide();
+			$('#left').hide();
+			$('#right').hide();
+			$('#ship1').hide();
+			$('#ship2').hide();
+			$('.alien').each(function(){
+				$(this).hide();
+			})
+			$('#scoreboard').hide();
+			$('#level').hide();
+			$('#menu').show();
+			numPlayers = 0;
+		})
 	}
 });
