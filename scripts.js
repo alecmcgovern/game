@@ -463,6 +463,8 @@ $('document').ready(function(){
 						waveTwo();
 					}, 2000);
 					clearInterval(checkLevel1);
+				}else{
+					clearInterval(checkLevel1);
 				}
 			}
 		},100);
@@ -523,6 +525,8 @@ $('document').ready(function(){
 						$('.alien').removeClass("active oneHP twoHP threeHP");
 						waveThree();
 					}, 1000);
+					clearInterval(checkLevel2);
+				}else{
 					clearInterval(checkLevel2);
 				}
 			}
@@ -592,8 +596,10 @@ $('document').ready(function(){
 					clearInterval(wave3);
 					setTimeout(function(){
 						$('.alien').removeClass("active oneHP twoHP threeHP");
-						youWin();
+						waveFour();
 					}, 1000);
+					clearInterval(checkLevel3);
+				}else{
 					clearInterval(checkLevel3);
 				}
 			}
@@ -601,8 +607,76 @@ $('document').ready(function(){
 
 	}
 
+	function waveFour(){
+		$('#levelnumber').text(4);
+		$('#levelindicator').text("Level 4");
+		$('#levelindicator').fadeIn(1000);
+		setTimeout(function(){
+			$('#levelindicator').fadeOut(1000);
+		},1000)
+		setupwave4($('#a1'));
+		setupwave4($('#a2'));
+		setupwave4($('#a3'));
+		setupwave4($('#a4'));
+		setupwave4($('#a5'));
+		setupwave4($('#a6'));
+
+		function setupwave4(alien){
+			alien.finish().empty();
+			alien.append("<img class='alien1' src='images/alien1.png'>");
+			alien.addClass("active oneHP twoHP threeHP");
+		}
+
+		$('#a1').css({left: "10%", top: "0%"});
+		$('#a2').css({left: "20%", top: "0%"});
+		$('#a3').css({left: "30%", top: "0%"});
+		$('#a4').css({left: "70%", top: "0%"});
+		$('#a5').css({left: "80%", top: "0%"});
+		$('#a6').css({left: "90%", top: "0%"});
+		$('.oneHP').each(function(){
+			$(this).show();
+		});
+
+		formation4();
+		var wave4 = setInterval(formation4,3000);
+
+		function formation4(){
+			$('.oneHP').animate({top: "100%"}, 1500, function(){
+				$('.oneHP').css("top", "0%");
+			});
+
+			Math.ceil(Math.random()*9)
+			$('#a1').animate({left: Math.ceil(Math.random()*9)+"0%", top: Math.ceil(Math.random()*9)+"0%"}, 1000);
+			$('#a2').animate({left: Math.ceil(Math.random()*9)+"0%", top: Math.ceil(Math.random()*9)+"0%"}, 1000);
+			$('#a3').animate({left: Math.ceil(Math.random()*9)+"0%", top: Math.ceil(Math.random()*9)+"0%"}, 1000);
+			$('#a4').animate({left: Math.ceil(Math.random()*9)+"0%", top: Math.ceil(Math.random()*9)+"0%"}, 1000);
+			$('#a5').animate({left: Math.ceil(Math.random()*9)+"0%", top: Math.ceil(Math.random()*9)+"0%"}, 1000);
+			$('#a6').animate({left: Math.ceil(Math.random()*9)+"0%", top: Math.ceil(Math.random()*9)+"0%"}, 1000);
+
+			$('.oneHP').animate({top: "100%"}, 1500, function(){
+				$('.oneHP').css("top", "0%");
+			});
+		}
+
+		var checkLevel4 = setInterval(function(){
+			if($('.oneHP').length<1){
+				if(winvariable===0){
+					clearInterval(wave4);
+					setTimeout(function(){
+						$('.alien').removeClass("active oneHP twoHP threeHP");
+						youWin();
+					}, 1000);
+					clearInterval(checkLevel4);
+				}else{
+					clearInterval(checkLevel4);
+				}
+			}
+		},100);
+	}
+
 	function youWin(){
 		if(winvariable===0){
+			winvariable=1;
 			$('.alien').hide();
 			$('.alien').finish();
 			$('.alien').removeClass('active oneHP twoHP threeHP');
