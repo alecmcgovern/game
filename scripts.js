@@ -664,11 +664,76 @@ $('document').ready(function(){
 					clearInterval(wave4);
 					setTimeout(function(){
 						$('.alien').removeClass("active oneHP twoHP threeHP");
-						youWin();
+						waveFive();
 					}, 1000);
 					clearInterval(checkLevel4);
 				}else{
 					clearInterval(checkLevel4);
+				}
+			}
+		},100);
+	}
+
+	function waveFive(){
+		$('#levelnumber').text(5);
+		$('#levelindicator').text("Level 5");
+		$('#levelindicator').fadeIn(1000);
+		setTimeout(function(){
+			$('#levelindicator').fadeOut(1000);
+		},1000)
+		setupwave5($('#a1'));
+		setupwave5($('#a2'));
+		setupwave5($('#a3'));
+		setupwave5($('#a4'));
+		setupwave5($('#a5'));
+		setupwave5($('#a6'));
+		setupwave5($('#a7'));
+		setupwave5($('#a8'));
+		setupwave5($('#a9'));
+		setupwave5($('#a10'));
+
+		function setupwave5(alien){
+			alien.finish().empty();
+			alien.append("<img class='alien1' src='images/alien1.png'>");
+			alien.addClass("active oneHP twoHP threeHP");
+		}
+
+		$('#a1').css({left: "10%", top: "0%"});
+		$('#a2').css({left: "20%", top: "0%"});
+		$('#a3').css({left: "30%", top: "0%"});
+		$('#a4').css({left: "40%", top: "0%"});
+		$('#a5').css({left: "50%", top: "0%"});
+		$('#a6').css({left: "60%", top: "0%"});
+		$('#a7').css({left: "70%", top: "0%"});
+		$('#a8').css({left: "80%", top: "0%"});
+		$('#a9').css({left: "90%", top: "0%"});
+		$('#a10').css({left: "0%", top: "0%"});
+		$('.oneHP').show();
+
+		formation5();
+		var wave5 = setInterval(formation5,3000);
+
+		function formation5(){
+			$('.oneHP').each(function(){
+				$(this).animate({left: Math.ceil(Math.random()*9)+"0%", top: Math.ceil(Math.random()*9)+"0%"}, 1000);
+			});
+
+			$('.oneHP').animate({top: "100%"}, 1500, function(){
+				$('.oneHP').css("top", "0%");
+			});
+		}
+
+		var checkLevel5 = setInterval(function(){
+			if($('.oneHP').length<1){
+				if(winvariable===0){
+					clearInterval(wave5);
+					setTimeout(function(){
+						$('.alien').removeClass("active oneHP twoHP threeHP");
+						youWin();
+					}, 1000);
+					clearInterval(checkLevel5);
+				}else{
+					clearInterval(checkLevel5);
 				}
 			}
 		},100);
