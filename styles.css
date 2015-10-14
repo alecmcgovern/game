@@ -127,6 +127,18 @@ h3 {
 }
 
 
+/*Level notification*/
+#levelindicator{
+	color: white;
+	top: 30%;
+	left: 25%;
+	width: 50%;
+	position: relative;
+	text-align: center;
+	font-family: 'Sigmar One';
+	font-size: 50px;
+}
+
 /*Scoreboard*/
 #scoreboard{
 	left: 5%;
