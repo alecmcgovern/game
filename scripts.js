@@ -1,24 +1,19 @@
 $('document').ready(function(){
-	//Audio Setup
+	//Audio Setup and volume
 	var spacemen = document.getElementById("spacemen");
-	spacemen.volume = 1.0;
-
 	var laser_sound = document.getElementById("lasersound");
-	laser_sound.volume = 0.4;
-
 	var click = document.getElementById("click");
-	click.volume = 0.4;
-
 	var boom = document.getElementById("boom");
-	boom.volume = 0.15;
-
 	var hit = document.getElementById("hit");
+	spacemen.volume = 1.0;
+	click.volume = 0.4;
+	laser_sound.volume = 0.4;
+	boom.volume = 0.15;
 	hit.volume = 0.2;
 
+	//music and effects control in the footer
 	var effects_volume = 1;
 	var music_volume = 1;
-
-	//mutes volume/effects when icon is clicked
 	$('#effectsVol').on('click', function(){
 		if(effects_volume===1){
 			$('#effectsVol').css({color: "grey"});
@@ -34,7 +29,6 @@ $('document').ready(function(){
 			effects_volume = 1;
 		}
 	});
-
 	$('#musicVol').on('click', function(){
 		if(music_volume===1){
 			$('#musicVol').css({color: "grey"});
@@ -53,48 +47,45 @@ $('document').ready(function(){
 	var player2active = 0;
 	var player1Lives = 3;
 	var player2Lives = 3;
-	var speed1 = 5;
+	var speed1 = 5;	
 	var speed2 = 5;
-	var laser_speed = 20;
-	var regenerating1 = 0;
+	var laser_speed = 20; 
+	var regenerating1 = 0; 
 	var regenerating2 = 0;
 	var winvariable = 0; 
 
-	mainMenuState();
+	mainMenuState(); //
 	
-	//This function runs through the menu before the game actually begins
+	//This function runs the menu before the game begins
 	function mainMenuState(){
 		$('.menuhide').hide();
 		$('.alien').hide();
 		$('#menu').show();
-
-		$('#solo').on('click', function(){
+		$('#solo').on('click', function(){ //if 'Solo' mode chosen
 			click.play();
 			numPlayers = 1;
 			controlsState();
 		})
-		$('#team').on('click', function(){
+		$('#team').on('click', function(){ //if 'Team' mode chosen
 			click.play();
 			numPlayers = 2;
 			controlsState();
 		})
 	}
 
-	//This function shows the game controls information, and calls the 'inGameState'
-	// function to begin the game
+	//This function runs the controls menu
 	function controlsState(){
 		$('#menu').hide();
 		$('#controls').show();
-		if (numPlayers===1){
+		if (numPlayers===1){  //Shows single player controls
 			$('#double').hide();
 			$('#arrowkeys').show();
 			$('#gotit').on('click', function(){
 				click.play();
 				$('#controls').hide();
-				inGameState();
-				
+				inGameState();		
 			});
-		}else if(numPlayers===2){
+		}else if(numPlayers===2){ //Shows team controls
 			$('#arrowkeys').hide();
 			$('#double').show();
 			$('#gotit').on('click', function(){
@@ -103,16 +94,14 @@ $('document').ready(function(){
 				inGameState();
 			});
 		}
-
-		$('#back').on('click', function(){
+		$('#back').on('click', function(){ //back to main menu
 			$('#controls').hide();
 			click.play();
 			mainMenuState();
 		});
 	}
 
-
-	//sets up game states for one player and two player
+	//This sets up single player mode
 	function setup1(){
 		score = 0;
 		speed1 = 5;
@@ -123,7 +112,7 @@ $('document').ready(function(){
 		$('#ship1').show();
 		$('.lives1').show();
 	}
-
+	// This sets up team mode
 	function setup2(){
 		score = 0;
 		speed1 = 5;
@@ -141,12 +130,12 @@ $('document').ready(function(){
 		$('.lives2').show();
 	}
 
-	//This bit of code is needed to use the kd ("keydrown") attached library
-	kd.run(function () {
+	//This controls the movement of the ships
+	//uses the "keydrown" jquery library found at: https://jeremyckahn.github.io/keydrown/
+ 	kd.run(function () { // this code is necessary for the keydrown library
  	 	kd.tick();
 	});
-
-	//This Code controls the arrow key movement of player  one's ship
+	//Player 1 controls
 	kd.DOWN.down(function(){
 		if($('#ship1').position().top < $('#playfield').height()-80 && player1active===1) {
 			$('#ship1').finish().animate({top: "+="+speed1});
@@ -167,8 +156,7 @@ $('document').ready(function(){
 			$('#ship1').finish().animate({left: "+="+speed1});
 		}
 	});
-
-	//This Code controls the 'WASD' movement of player two's ship
+	//Player 2 controls
 	kd.S.down(function(){
 		if($('#ship2').position().top < $('#playfield').height()-80 && player2active===1) {
 			$('#ship2').finish().animate({top: "+="+speed2});
@@ -190,15 +178,14 @@ $('document').ready(function(){
 		}
 	});	
 
-	//updates the score every 100 milliseconds
+	//updates the score box on the right every 100 milliseconds
 	var score = 0;
 	setInterval(updateScore,100);	
-
 	function updateScore(){
 		$('#score').text(score);
 	}
 
-	//This code fires the lasers
+	//This code triggers the lasers when SPACE and SHIFT are pressed
 	$(document).keydown(function(e){
 		e.preventDefault();
 		if (e.which === 32){
@@ -211,7 +198,7 @@ $('document').ready(function(){
 		}
 	});
 		
-	//ship1 laser 
+	//appends a new "laser" div at the position of ship 1
 	function fire1(){
 		if(player1active===1){
 			var x = $('#ship1').position();
@@ -221,7 +208,7 @@ $('document').ready(function(){
 		}
 	}
 
-	//ship 2 laser
+	//appends a new "laser" div at the position of ship2
 	function fire2(){
 		if (player2active===1) {
 			var y = $('#ship2').position();
@@ -233,15 +220,14 @@ $('document').ready(function(){
 
 	//udate all laser positions every 30 milliseconds, and checks for collision with alien ships
 	setInterval(updateLaserPosition, 30);
-
 	function updateLaserPosition(){
 		$('.laser').each(function(){
 			var oldHeight = $(this).offset().top;
-			if (oldHeight>0){
+			if (oldHeight>0){  // if at top of screen, remove
 				$(this).css("top", oldHeight-laser_speed);
 				var laserCoordinates = $(this).position();
 				var collided = checkCollision(laserCoordinates);
-				if(collided){
+				if(collided){  // if collided with alien, remove
 					$(this).remove();
 				}
 			}else{
@@ -251,34 +237,34 @@ $('document').ready(function(){
 	}
 
 	//Code to sense when the laser hits an alien ship
-	function checkCollision(object){
+	function checkCollision(object){ //takes in the top and left coordinates of a laser
 		var isHit = null;
-		$('.active').each(function(){
+		$('.oneHP').each(function(){ //cycles through all remaining aliens
 			var alienPos = $(this).position();
 			var alienHeight = $(this).height();
 			var alienWidth = $(this).width();
 			if(alienPos.top <object.top && object.top < alienPos.top + alienHeight &&
-				alienPos.left< object.left && object.left<alienPos.left + alienWidth){
-					if($(this).hasClass("threeHP")){
+				alienPos.left< object.left && object.left<alienPos.left + alienWidth){ //checks coordinates against the laser
+					if($(this).hasClass("threeHP")){ // removes a hit point
 						hit.currentTime=0;
 						hit.play();
 						$(this).removeClass("threeHP");
 						isHit = true;
 						return false;
-					}else if($(this).hasClass("twoHP")){
+					}else if($(this).hasClass("twoHP")){ // removes a hit point
 						hit.currentTime=0;
 						hit.play();
 						$(this).removeClass("twoHP");
 						isHit = true;
 						return false;
-					}else if($(this).hasClass("oneHP")){
+					}else if($(this).hasClass("oneHP")){ //removes last hit point
 						boom.currentTime=0;
 						boom.play();
 						$(this).removeClass("oneHP active");
 						$(this).stop(true).empty();
 						$(this).append("<img class='alien1' src='images/explosion.png'>");
 						$(this).fadeOut(1000);
-						score += 10;
+						score += 10;  // increases score
 						isHit =  true;
 						return false;
 					} 
@@ -291,19 +277,18 @@ $('document').ready(function(){
 
 	//This checks to see if the aliens hit either player every 30 milliseconds
 	setInterval(checkDamage, 30);
-
 	function checkDamage(){
-		$('.active').each(function(){
+		$('.oneHP').each(function(){ // cycles through all remaining aliens
 			var alienPos = $(this).position();
 			var alienHeight = $(this).height();
 			var alienWidth = $(this).width();
 			var player1Pos = $('#ship1').position();
-			var player2Pos = $('#ship2').position();
 			if (player1Pos.top < alienPos.top + alienHeight  &&
 				alienPos.top  < player1Pos.top + $('#ship1').height() &&
 				player1Pos.left < alienPos.left + alienWidth &&
 				alienPos.left < player1Pos.left + $('#ship1').width()){
 					if (regenerating1===0){
+						boom.play();
 						regenerating1=1;
 						$(this).removeClass("active oneHP twoHP threeHP");																							
 						$(this).stop(true).empty();
@@ -312,12 +297,14 @@ $('document').ready(function(){
 						player1LifeLoss();
 					}
 			}
-			if(numPlayers===2){
+			if(numPlayers===2){  // checks against player 2 ship only if numPlayers===2
+				var player2Pos = $('#ship2').position();
 				if (player2Pos.top < alienPos.top + alienHeight  &&
 					alienPos.top  < player2Pos.top + $('#ship2').height() &&
 					player2Pos.left < alienPos.left + alienWidth &&
 					alienPos.left < player2Pos.left + $('#ship2').width()){
 						if(regenerating2===0){
+							boom.play();
 							regenerating2=1;
 							$(this).removeClass("active oneHP twoHP threeHP");
 							$(this).hide();
@@ -333,7 +320,6 @@ $('document').ready(function(){
 
 	//This takes away a life when player 1's ship is hit
 	function player1LifeLoss () {
-		boom.play();
 		if(player1Lives===3){
 			$('#life11').hide();
 			player1Lives=2;
@@ -345,7 +331,7 @@ $('document').ready(function(){
 			player1Lives=0;
 			gameOver();
 		}
-		$('#ship1').css('opacity', '0');
+		$('#ship1').css('opacity', '0'); //blinks ship while regenerating
 		var handle = setInterval(function(){
 			$('#ship1').css('opacity', '1');
 			setTimeout(function(){
@@ -353,8 +339,7 @@ $('document').ready(function(){
 			}, 200);
 		}, 400);
 
-		setTimeout(clear, 2000);
-
+		setTimeout(clear, 2000); //time spent regenerating
 		function clear() {
 			clearInterval(handle);
 			$('#ship1').css('opacity', '1');
@@ -364,7 +349,6 @@ $('document').ready(function(){
 
 	//This takes away a life when player 2's ship is hit
 	function player2LifeLoss (){
-		boom.play();
 		if(player2Lives===3){
 			$('#life21').hide();
 			player2Lives=2;
@@ -376,7 +360,7 @@ $('document').ready(function(){
 			player2Lives=0;
 			gameOver();
 		}
-		$('#ship2').css('opacity', '0');
+		$('#ship2').css('opacity', '0');  // blinks ship while regenerating
 		var handle = setInterval(function(){
 			$('#ship2').css('opacity', '1');
 			setTimeout(function(){
@@ -384,8 +368,7 @@ $('document').ready(function(){
 			}, 200);
 		}, 400);
 
-		setTimeout(clear2, 2000);
-
+		setTimeout(clear2, 2000); //time spent regenerating
 		function clear2() {
 			clearInterval(handle);
 			$('#ship2').css('opacity', '1');
@@ -408,19 +391,20 @@ $('document').ready(function(){
 		setTimeout(waveOne, 100); 
 	} 
 
-//Alien waves/levels.  Set interval, cleared when all enemies have been defeated
-	// add health and ships to each level
+
+	//The following functions controls the waves of Aliens.  
+	//Each wave triggers the next when all aliens have been defeated
 
 	//Wave one
 	function waveOne(){
-		$('#levelnumber').text(1);
+		$('#levelnumber').text(1);  //level indicators
 		$('#levelindicator').text("Level 1");
 		$('#levelindicator').fadeIn(1000);
 		setTimeout(function(){
 			$('#levelindicator').fadeOut(1000);
 		},1000)
 		winvariable=0;
-		setupwave1($('#a1'));
+		setupwave1($('#a1')); //sets up the aliens for this level
 		setupwave1($('#a2'));
 		setupwave1($('#a3'));
 
@@ -430,7 +414,7 @@ $('document').ready(function(){
 			alien.addClass("active oneHP twoHP");
 		}
 
-		$('#a1').css({left: "10%", top: "0%"});
+		$('#a1').css({left: "10%", top: "0%"}); //Starting position of aliens
 		$('#a2').css({left: "50%", top: "0%"});
 		$('#a3').css({left: "90%", top: "0%"});
 		$('.active').each(function(){
@@ -438,8 +422,7 @@ $('document').ready(function(){
 		});
 
 		formation1();
-		var wave1 = setInterval(formation1,7000);
-
+		var wave1 = setInterval(formation1,7000); //repeats the pre-determined formation
 		function formation1(){
 			$('#a1').animate({left: "70%"}, 3000);
 			$('#a2').animate({left: "40%"}, 3000);
@@ -454,13 +437,13 @@ $('document').ready(function(){
 			});
 		}
 
-		var checkLevel1 = setInterval(function(){
-			if($('.oneHP').length<1){
+		var checkLevel1 = setInterval(function(){ 
+			if($('.oneHP').length<1){ //Checks to see how many aliens are left
 				if(winvariable===0){
 					clearInterval(wave1);
 					setTimeout(function(){
 						$('.alien').removeClass("active oneHP twoHP threeHP");
-						waveTwo();
+						waveTwo(); //Calls the next wave
 					}, 2000);
 					clearInterval(checkLevel1);
 				}else{
@@ -469,34 +452,31 @@ $('document').ready(function(){
 			}
 		},100);
 	}
-
+	//Wave 2
 	function waveTwo(){
-		$('#levelnumber').text(2);
+		$('#levelnumber').text(2); //level indicators
 		$('#levelindicator').text("Level 2");
 		$('#levelindicator').fadeIn(1000);
 		setTimeout(function(){
 			$('#levelindicator').fadeOut(1000);
 		},1000)
-		setupwave2($('#a1'));
+
+		setupwave2($('#a1')); //sets up the aliens for the level
 		setupwave2($('#a2'));
 		setupwave2($('#a3'));
-
 		function setupwave2(alien){
 			alien.finish().empty();
 			alien.append("<img class='alien1' src='images/alien1.png'>");
 			alien.addClass("active oneHP twoHP threeHP");
 		}
 
-		$('#a1').css({left: "10%", top: "0%"});
-		$('#a2').css({left: "20%", top: "0%"});
+		$('#a1').css({left: "10%", top: "0%"}); //starting positions
+		$('#a2').css({left: "20%", top: "0%"}); 
 		$('#a3').css({left: "30%", top: "0%"});
-		$('.oneHP').each(function(){
-			$(this).show();
-		});
+		$('.oneHP').show();
 
 		formation2();
-		var wave2 = setInterval(formation2,7000);
-
+		var wave2 = setInterval(formation2,7000); //Loops formation
 		function formation2(){
 			$('#a1').animate({left: "90%"}, 2000);
 			$('#a2').animate({left: "80%"}, 2000);
@@ -518,12 +498,12 @@ $('document').ready(function(){
 			});
 		}
 		var checkLevel2 = setInterval(function(){
-			if($('.oneHP').length<1){
+			if($('.oneHP').length<1){ //Checks to see how many aliens remain
 				if(winvariable===0){
 					clearInterval(wave2);
 					setTimeout(function(){
 						$('.alien').removeClass("active oneHP twoHP threeHP");
-						waveThree();
+						waveThree(); // next wave
 					}, 1000);
 					clearInterval(checkLevel2);
 				}else{
@@ -534,38 +514,35 @@ $('document').ready(function(){
 	}
 
 	function waveThree(){
-		$('#levelnumber').text(3);
+		$('#levelnumber').text(3);  //level indicators
 		$('#levelindicator').text("Level 3");
 		$('#levelindicator').fadeIn(1000);
 		setTimeout(function(){
 			$('#levelindicator').fadeOut(1000);
 		},1000)
-		setupwave3($('#a1'));
+
+		setupwave3($('#a1')); //sets up aliens
 		setupwave3($('#a2'));
 		setupwave3($('#a3'));
 		setupwave3($('#a4'));
 		setupwave3($('#a5'));
 		setupwave3($('#a6'));
-
 		function setupwave3(alien){
 			alien.finish().empty();
 			alien.append("<img class='alien1' src='images/alien1.png'>");
 			alien.addClass("active oneHP twoHP threeHP");
 		}
 
-		$('#a1').css({left: "10%", top: "0%"});
+		$('#a1').css({left: "10%", top: "0%"}); //starting positions
 		$('#a2').css({left: "20%", top: "0%"});
 		$('#a3').css({left: "30%", top: "0%"});
 		$('#a4').css({left: "70%", top: "0%"});
 		$('#a5').css({left: "80%", top: "0%"});
 		$('#a6').css({left: "90%", top: "0%"});
-		$('.oneHP').each(function(){
-			$(this).show();
-		});
+		$('.oneHP').show();
 
 		formation3();
-		var wave3 = setInterval(formation3,7000);
-
+		var wave3 = setInterval(formation3,7000); //loops formations
 		function formation3(){
 			$('#a1').animate({left: "20%"}, 1000);
 			$('#a2').animate({left: "30%"}, 1000);
@@ -591,12 +568,12 @@ $('document').ready(function(){
 		}
 
 		var checkLevel3 = setInterval(function(){
-			if($('.oneHP').length<1){
+			if($('.oneHP').length<1){ //checks for remaining aliens
 				if(winvariable===0){
 					clearInterval(wave3);
 					setTimeout(function(){
 						$('.alien').removeClass("active oneHP twoHP threeHP");
-						waveFour();
+						waveFour(); //next level
 					}, 1000);
 					clearInterval(checkLevel3);
 				}else{
@@ -608,43 +585,39 @@ $('document').ready(function(){
 	}
 
 	function waveFour(){
-		$('#levelnumber').text(4);
+		$('#levelnumber').text(4); //level indicators
 		$('#levelindicator').text("Level 4");
 		$('#levelindicator').fadeIn(1000);
 		setTimeout(function(){
 			$('#levelindicator').fadeOut(1000);
 		},1000)
-		setupwave4($('#a1'));
+
+		setupwave4($('#a1')); //setup aliens
 		setupwave4($('#a2'));
 		setupwave4($('#a3'));
 		setupwave4($('#a4'));
 		setupwave4($('#a5'));
 		setupwave4($('#a6'));
-
 		function setupwave4(alien){
 			alien.finish().empty();
 			alien.append("<img class='alien1' src='images/alien1.png'>");
 			alien.addClass("active oneHP twoHP threeHP");
 		}
 
-		$('#a1').css({left: "10%", top: "0%"});
-		$('#a2').css({left: "20%", top: "0%"});
+		$('#a1').css({left: "10%", top: "0%"}); //starting positions
+		$('#a2').css({left: "20%", top: "0%"}); 
 		$('#a3').css({left: "30%", top: "0%"});
 		$('#a4').css({left: "70%", top: "0%"});
 		$('#a5').css({left: "80%", top: "0%"});
 		$('#a6').css({left: "90%", top: "0%"});
-		$('.oneHP').each(function(){
-			$(this).show();
-		});
+		$('.oneHP').show();
 
 		formation4();
-		var wave4 = setInterval(formation4,3000);
-
+		var wave4 = setInterval(formation4,3000); //loops formation
 		function formation4(){
 			$('.oneHP').animate({top: "100%"}, 1500, function(){
 				$('.oneHP').css("top", "0%");
 			});
-
 			Math.ceil(Math.random()*9)
 			$('#a1').animate({left: Math.ceil(Math.random()*9)+"0%", top: Math.ceil(Math.random()*9)+"0%"}, 1000);
 			$('#a2').animate({left: Math.ceil(Math.random()*9)+"0%", top: Math.ceil(Math.random()*9)+"0%"}, 1000);
@@ -659,12 +632,12 @@ $('document').ready(function(){
 		}
 
 		var checkLevel4 = setInterval(function(){
-			if($('.oneHP').length<1){
+			if($('.oneHP').length<1){ //checks for remaining aliens
 				if(winvariable===0){
 					clearInterval(wave4);
 					setTimeout(function(){
 						$('.alien').removeClass("active oneHP twoHP threeHP");
-						waveFive();
+						waveFive(); //next level
 					}, 1000);
 					clearInterval(checkLevel4);
 				}else{
@@ -675,13 +648,14 @@ $('document').ready(function(){
 	}
 
 	function waveFive(){
-		$('#levelnumber').text(5);
+		$('#levelnumber').text(5);  //level indicators
 		$('#levelindicator').text("Level 5");
 		$('#levelindicator').fadeIn(1000);
 		setTimeout(function(){
 			$('#levelindicator').fadeOut(1000);
 		},1000)
-		setupwave5($('#a1'));
+
+		setupwave5($('#a1')); //sets up aliens
 		setupwave5($('#a2'));
 		setupwave5($('#a3'));
 		setupwave5($('#a4'));
@@ -691,14 +665,13 @@ $('document').ready(function(){
 		setupwave5($('#a8'));
 		setupwave5($('#a9'));
 		setupwave5($('#a10'));
-
 		function setupwave5(alien){
 			alien.finish().empty();
 			alien.append("<img class='alien1' src='images/alien1.png'>");
 			alien.addClass("active oneHP twoHP threeHP");
 		}
 
-		$('#a1').css({left: "10%", top: "0%"});
+		$('#a1').css({left: "10%", top: "0%"}); //starting positions
 		$('#a2').css({left: "20%", top: "0%"});
 		$('#a3').css({left: "30%", top: "0%"});
 		$('#a4').css({left: "40%", top: "0%"});
@@ -711,25 +684,23 @@ $('document').ready(function(){
 		$('.oneHP').show();
 
 		formation5();
-		var wave5 = setInterval(formation5,3000);
-
+		var wave5 = setInterval(formation5,3000); //loops formation
 		function formation5(){
 			$('.oneHP').each(function(){
 				$(this).animate({left: Math.ceil(Math.random()*9)+"0%", top: Math.ceil(Math.random()*9)+"0%"}, 1000);
 			});
-
 			$('.oneHP').animate({top: "100%"}, 1500, function(){
 				$('.oneHP').css("top", "0%");
 			});
 		}
 
 		var checkLevel5 = setInterval(function(){
-			if($('.oneHP').length<1){
+			if($('.oneHP').length<1){ //checks for remaining aliens
 				if(winvariable===0){
 					clearInterval(wave5);
 					setTimeout(function(){
 						$('.alien').removeClass("active oneHP twoHP threeHP");
-						youWin();
+						youWin(); //you win!
 					}, 1000);
 					clearInterval(checkLevel5);
 				}else{
@@ -739,6 +710,7 @@ $('document').ready(function(){
 		},100);
 	}
 
+	//This is called when you win the game, and lets you replay or go to main menu
 	function youWin(){
 		if(winvariable===0){
 			winvariable=1;
@@ -770,7 +742,8 @@ $('document').ready(function(){
 			});
 		}
 	}
-	//you lose
+
+	//you lose.  Try again or main menu
 	function gameOver() {
 		winvariable=1;
 		$('.alien').hide();
