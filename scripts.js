@@ -18,6 +18,7 @@ $('document').ready(function(){
 	var effects_volume = 1;
 	var music_volume = 1;
 
+	//mutes volume/effects when icon is clicked
 	$('#effectsVol').on('click', function(){
 		if(effects_volume===1){
 			$('#effectsVol').css({color: "grey"});
@@ -46,6 +47,7 @@ $('document').ready(function(){
 		}
 	});
 
+	//Global variables
 	var numPlayers = 0;
 	var player1active = 0;
 	var player2active = 0;
@@ -54,24 +56,16 @@ $('document').ready(function(){
 	var speed1 = 5;
 	var speed2 = 5;
 	var laser_speed = 20;
+	var regenerating1 = 0;
+	var regenerating2 = 0;
+	var winvariable = 0; 
+
 	mainMenuState();
 	
-
-
 	//This function runs through the menu before the game actually begins
 	function mainMenuState(){
-		$('.lives1').hide();
-		$('.lives2').hide();
-		$('#left').hide();
-		$('#right').hide();
-		$('#ship1').hide();
-		$('#ship2').hide();
-		$('.powerups').hide();
-		$('.alien').each(function(){
-			$(this).hide();
-		})
-		$('#scoreboard').hide();
-		$('#level').hide();
+		$('.menuhide').hide();
+		$('.alien').hide();
 		$('#menu').show();
 
 		$('#solo').on('click', function(){
@@ -86,6 +80,8 @@ $('document').ready(function(){
 		})
 	}
 
+	//This function shows the game controls information, and calls the 'inGameState'
+	// function to begin the game
 	function controlsState(){
 		$('#menu').hide();
 		$('#controls').show();
@@ -194,14 +190,13 @@ $('document').ready(function(){
 		}
 	});	
 
-	//updates the score
+	//updates the score every 100 milliseconds
 	var score = 0;
 	setInterval(updateScore,100);	
 
 	function updateScore(){
 		$('#score').text(score);
 	}
-
 
 	//This code fires the lasers
 	$(document).keydown(function(e){
@@ -236,7 +231,7 @@ $('document').ready(function(){
 		}
 	}
 
-	//udate all laser positions
+	//udate all laser positions every 30 milliseconds, and checks for collision with alien ships
 	setInterval(updateLaserPosition, 30);
 
 	function updateLaserPosition(){
@@ -294,10 +289,8 @@ $('document').ready(function(){
 		return isHit;
 	}
 
-	//This checks to see if the aliens hit either player
+	//This checks to see if the aliens hit either player every 30 milliseconds
 	setInterval(checkDamage, 30);
-	var regenerating1 = 0;
-	var regenerating2 = 0;
 
 	function checkDamage(){
 		$('.active').each(function(){
@@ -338,18 +331,16 @@ $('document').ready(function(){
 		});
 	}
 
-	//This takes away a life when player's ship is hit
+	//This takes away a life when player 1's ship is hit
 	function player1LifeLoss () {
 		boom.play();
 		if(player1Lives===3){
 			$('#life11').hide();
 			player1Lives=2;
-		}
-		else if(player1Lives===2){
+		}else if(player1Lives===2){
 			$('#life12').hide();
 			player1Lives=1;
-		}
-		else if(player1Lives===1){
+		}else if(player1Lives===1){
 			$('#life13').hide();
 			player1Lives=0;
 			gameOver();
@@ -371,18 +362,16 @@ $('document').ready(function(){
 		}
 	}
 
-
+	//This takes away a life when player 2's ship is hit
 	function player2LifeLoss (){
 		boom.play();
 		if(player2Lives===3){
 			$('#life21').hide();
 			player2Lives=2;
-		}
-		else if(player2Lives===2){
+		}else if(player2Lives===2){
 			$('#life22').hide();
 			player2Lives=1;
-		}
-		else if(player2Lives===1){
+		}else if(player2Lives===1){
 			$('#life23').hide();
 			player2Lives=0;
 			gameOver();
@@ -404,8 +393,7 @@ $('document').ready(function(){
 		}	
 	}
 
-
-	//This code is for when the user is playing the game
+	//This code starts stuff off when play is pressed
 	function inGameState(){	
 		if (numPlayers===1){
 			setup1();
@@ -416,22 +404,21 @@ $('document').ready(function(){
 			spacemen.play();
 		}, 1000);
 
-		$('#left').show();
-		$('#right').show();
-		$('footer').show();
-		$('#scoreboard').show();
-		$('#level').show();
-		$('#levelnumber').text(1);
-
-
+		$('.gamestateshow').show();
 		setTimeout(waveOne, 100); 
-	} //end of inGameState
+	} 
 
 //Alien waves/levels.  Set interval, cleared when all enemies have been defeated
 	// add health and ships to each level
-	var winvariable = 0;
+
 	//Wave one
 	function waveOne(){
+		$('#levelnumber').text(1);
+		$('#levelindicator').text("Level 1");
+		$('#levelindicator').fadeIn(1000);
+		setTimeout(function(){
+			$('#levelindicator').fadeOut(1000);
+		},1000)
 		winvariable=0;
 		setupwave1($('#a1'));
 		setupwave1($('#a2'));
@@ -469,18 +456,25 @@ $('document').ready(function(){
 
 		var checkLevel1 = setInterval(function(){
 			if($('.oneHP').length<1){
-				clearInterval(wave1);
-				setTimeout(function(){
-					$('.alien').removeClass("active oneHP twoHP threeHP");
-					waveTwo();
-				}, 2000);
-				clearInterval(checkLevel1);
+				if(winvariable===0){
+					clearInterval(wave1);
+					setTimeout(function(){
+						$('.alien').removeClass("active oneHP twoHP threeHP");
+						waveTwo();
+					}, 2000);
+					clearInterval(checkLevel1);
+				}
 			}
 		},100);
 	}
 
 	function waveTwo(){
 		$('#levelnumber').text(2);
+		$('#levelindicator').text("Level 2");
+		$('#levelindicator').fadeIn(1000);
+		setTimeout(function(){
+			$('#levelindicator').fadeOut(1000);
+		},1000)
 		setupwave2($('#a1'));
 		setupwave2($('#a2'));
 		setupwave2($('#a3'));
@@ -523,84 +517,89 @@ $('document').ready(function(){
 		}
 		var checkLevel2 = setInterval(function(){
 			if($('.oneHP').length<1){
-				clearInterval(wave2);
-				setTimeout(function(){
-					$('.alien').removeClass("active oneHP twoHP threeHP");
-					youWin();
-				}, 1000);
-				clearInterval(checkLevel2);
+				if(winvariable===0){
+					clearInterval(wave2);
+					setTimeout(function(){
+						$('.alien').removeClass("active oneHP twoHP threeHP");
+						waveThree();
+					}, 1000);
+					clearInterval(checkLevel2);
+				}
 			}
 		},100);
 	}
 
-	// function waveThree(){
-	// 	$('#levelnumber').text(3);
-	// 	$('.active').finish();
-	// 	setupwave3($('#a1'));
-	// 	setupwave3($('#a2'));
-	// 	setupwave3($('#a3'));
-	// 	setupwave3($('#a4'));
-	// 	setupwave3($('#a5'));
-	// 	setupwave3($('#a6'));
+	function waveThree(){
+		$('#levelnumber').text(3);
+		$('#levelindicator').text("Level 3");
+		$('#levelindicator').fadeIn(1000);
+		setTimeout(function(){
+			$('#levelindicator').fadeOut(1000);
+		},1000)
+		setupwave3($('#a1'));
+		setupwave3($('#a2'));
+		setupwave3($('#a3'));
+		setupwave3($('#a4'));
+		setupwave3($('#a5'));
+		setupwave3($('#a6'));
 
-	// 	function setupwave3(alien){
-	// 		alien.finish().empty();
-	// 		alien.append("<img class='alien1' src='images/alien1.png'>");
-	// 		alien.addClass("active");
-	// 		alien.addClass("oneHP");
-	// 		alien.addClass("twoHP");
-	// 		alien.addClass("threeHP");
-	// 	}
+		function setupwave3(alien){
+			alien.finish().empty();
+			alien.append("<img class='alien1' src='images/alien1.png'>");
+			alien.addClass("active oneHP twoHP threeHP");
+		}
 
-	// 	$('#a1').css({left: "10%", top: "0%"});
-	// 	$('#a2').css({left: "20%", top: "0%"});
-	// 	$('#a3').css({left: "30%", top: "0%"});
-	// 	$('#a4').css({left: "70%", top: "0%"});
-	// 	$('#a5').css({left: "80%", top: "0%"});
-	// 	$('#a6').css({left: "90%", top: "0%"});
-	// 	$('.active').each(function(){
-	// 		$(this).show();
-	// 	});
+		$('#a1').css({left: "10%", top: "0%"});
+		$('#a2').css({left: "20%", top: "0%"});
+		$('#a3').css({left: "30%", top: "0%"});
+		$('#a4').css({left: "70%", top: "0%"});
+		$('#a5').css({left: "80%", top: "0%"});
+		$('#a6').css({left: "90%", top: "0%"});
+		$('.oneHP').each(function(){
+			$(this).show();
+		});
 
-	// 	formation3();
-	// 	var wave3 = setInterval(formation3,7000);
+		formation3();
+		var wave3 = setInterval(formation3,7000);
 
-	// 	function formation3(){
-	// 		$('#a1').animate({left: "20%"}, 1000);
-	// 		$('#a2').animate({left: "30%"}, 1000);
-	// 		$('#a3').animate({left: "70%"}, 1000);
-	// 		$('#a4').animate({left: "40%"}, 1000);
-	// 		$('#a5').animate({left: "50%"}, 1000);
-	// 		$('#a6').animate({left: "60%"}, 1000);
+		function formation3(){
+			$('#a1').animate({left: "20%"}, 1000);
+			$('#a2').animate({left: "30%"}, 1000);
+			$('#a3').animate({left: "70%"}, 1000);
+			$('#a4').animate({left: "40%"}, 1000);
+			$('#a5').animate({left: "50%"}, 1000);
+			$('#a6').animate({left: "60%"}, 1000);
 
-	// 		$('.active').animate({top: "100%"}, 1500, function(){
-	// 			$('.active').css("top", "0%");
-	// 		});
+			$('.oneHP').animate({top: "100%"}, 1500, function(){
+				$('.oneHP').css("top", "0%");
+			});
 
-	// 		$('#a1').animate({left: "50%", top: "40%"}, 1000);
-	// 		$('#a2').animate({left: "10%"}, 1000);
-	// 		$('#a3').animate({left: "30%", top: "40%"}, 1000);
-	// 		$('#a4').animate({left: "80%"}, 1000);
-	// 		$('#a5').animate({left: "70%", top: "40%"}, 1000);
-	// 		$('#a6').animate({left: "90%"}, 1000);
+			$('#a1').animate({left: "50%", top: "40%"}, 1000);
+			$('#a2').animate({left: "10%"}, 1000);
+			$('#a3').animate({left: "30%", top: "40%"}, 1000);
+			$('#a4').animate({left: "80%"}, 1000);
+			$('#a5').animate({left: "70%", top: "40%"}, 1000);
+			$('#a6').animate({left: "90%"}, 1000);
 
-	// 		$('.active').animate({top: "100%"}, 1500, function(){
-	// 			$('.active').css("top", "0%");
-	// 		});
-	// 	}
+			$('.oneHP').animate({top: "100%"}, 1500, function(){
+				$('.oneHP').css("top", "0%");
+			});
+		}
 
-	// 	var checkLevel3 = setInterval(function(){
-	// 		if($('.oneHP').length<1){
-	// 			clearInterval(wave3);
-	// 			setTimeout(function(){
-	// 				$('.active').finish();
-	// 				youWin();
-	// 			}, 2000);
-	// 			clearInterval(checkLevel3);
-	// 		}
-	// 	},1000);
+		var checkLevel3 = setInterval(function(){
+			if($('.oneHP').length<1){
+				if(winvariable===0){
+					clearInterval(wave3);
+					setTimeout(function(){
+						$('.alien').removeClass("active oneHP twoHP threeHP");
+						youWin();
+					}, 1000);
+					clearInterval(checkLevel3);
+				}
+			}
+		},100);
 
-	// }
+	}
 
 	function youWin(){
 		if(winvariable===0){
@@ -625,17 +624,8 @@ $('document').ready(function(){
 			$('#tomenu').on('click', function(){
 				$('#youwin').hide();
 				click.play();
-				$('.lives1').hide();
-				$('.lives2').hide();
-				$('#left').hide();
-				$('#right').hide();
-				$('#ship1').hide();
-				$('#ship2').hide();
-				$('.alien').each(function(){
-					$(this).hide();
-				})
-				$('#scoreboard').hide();
-				$('#level').hide();
+				$('.menuhide').hide();
+				$('.alien').hide();
 				$('#menu').show();
 				numPlayers = 0;
 			});
@@ -655,27 +645,17 @@ $('document').ready(function(){
 			click.play();
 			if(numPlayers===1){
 				setup1();
-				inGameState();
 			}
 			if(numPlayers===2){
 				setup2();
-				inGameState();
 			}
+			inGameState();
 		});
 		$('#mainmenu').on('click', function(){
 			$('#gameover').hide();
 			click.play();
-			$('.lives1').hide();
-			$('.lives2').hide();
-			$('#left').hide();
-			$('#right').hide();
-			$('#ship1').hide();
-			$('#ship2').hide();
-			$('.alien').each(function(){
-				$(this).hide();
-			})
-			$('#scoreboard').hide();
-			$('#level').hide();
+			$('.menuhide').hide();
+			$('.alien').hide();
 			$('#menu').show();
 			numPlayers = 0;
 		})

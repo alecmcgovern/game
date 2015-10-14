@@ -25,7 +25,7 @@
 
 
 	<!-- Sidebar left -->
-	<div id="left" class="up">
+	<div id="left" class="up menuhide gamestateshow">
 		<!-- Level -->
 		<div id="level">Level: <code id="levelnumber"></code></div>
 	</div>
@@ -42,6 +42,7 @@
 			<img id="menuImage3" src="images/player1_ship.png">
 		</div>
 
+		<!-- Controls info -->
 		<div id="controls" hidden>
 			<h2>Controls</h2>
 				<img id="arrowkeys" src="images/controls.png">
@@ -66,11 +67,13 @@
 			<h3 id="tomenu">Main Menu</h3>
 		</div>
 
+		<div id="levelindicator" hidden></div>
+
 		<!-- Player 1 and Player 2 ships -->
-		<div id="ship1" class="ship">
+		<div id="ship1" class="ship menuhide">
 			<img class="player" src="images/player1_ship.png">
 		</div>
-		<div id="ship2" class="ship">
+		<div id="ship2" class="ship menuhide">
 			<img class="player" src="images/player2_ship.png">
 		</div>
 
@@ -109,16 +112,16 @@
 	</div>
 
 	<!-- Sidebar right-->
-	<div id="right" class="up">
+	<div id="right" class="up menuhide gamestateshow">
 		<!-- Score -->
 		<div id="scoreboard">Score: <code id="score"></code></div>
 	</div>
 
 	<!-- Footer -->
-	<footer>
-		<img id="life11" class="lives1" src="images/player1_ship.png">
-		<img id="life12" class="lives1" src="images/player1_ship.png">
-		<img id="life13" class="lives1" src="images/player1_ship.png">
+	<footer class="gamestateshow">
+		<img id="life11" class="lives1 menuhide" src="images/player1_ship.png">
+		<img id="life12" class="lives1 menuhide" src="images/player1_ship.png">
+		<img id="life13" class="lives1 menuhide" src="images/player1_ship.png">
 
 		<div id="vol">
 			<div class="volcontrol">Music 
@@ -129,9 +132,9 @@
 			 Effects</div>
 		</div>
 
-		<img id="life21" class="lives2" src="images/player2_ship.png">
-		<img id="life22" class="lives2" src="images/player2_ship.png">
-		<img id="life23" class="lives2" src="images/player2_ship.png">
+		<img id="life21" class="lives2 menuhide" src="images/player2_ship.png">
+		<img id="life22" class="lives2 menuhide" src="images/player2_ship.png">
+		<img id="life23" class="lives2 menuhide" src="images/player2_ship.png">
 	</footer>
 
 
