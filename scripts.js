@@ -429,9 +429,10 @@ $('document').ready(function(){
 
 //Alien waves/levels.  Set interval, cleared when all enemies have been defeated
 	// add health and ships to each level
-	
+	var winvariable = 0;
 	//Wave one
 	function waveOne(){
+		winvariable=0;
 		setupwave1($('#a1'));
 		setupwave1($('#a2'));
 		setupwave1($('#a3'));
@@ -526,10 +527,10 @@ $('document').ready(function(){
 				setTimeout(function(){
 					$('.alien').removeClass("active oneHP twoHP threeHP");
 					youWin();
-				}, 2000);
+				}, 1000);
 				clearInterval(checkLevel2);
 			}
-		},1000);
+		},100);
 	}
 
 	// function waveThree(){
@@ -601,46 +602,48 @@ $('document').ready(function(){
 
 	// }
 
-
 	function youWin(){
-		$('.alien').hide();
-		$('.alien').finish();
-		$('.alien').removeClass('active oneHP twoHP threeHP');
-		player1active = 0;
-		player2active = 0;
-		$('#youwin').show();
-		$('#replay').on('click', function(){
-			$('#youwin').hide();
-			click.play();
-			if(numPlayers===1){
-				setup1();
-				inGameState();
-			}
-			if(numPlayers===2){
-				setup2();
-				inGameState();
-			}
-		});
-		$('#tomenu').on('click', function(){
-			$('#youwin').hide();
-			click.play();
-			$('.lives1').hide();
-			$('.lives2').hide();
-			$('#left').hide();
-			$('#right').hide();
-			$('#ship1').hide();
-			$('#ship2').hide();
-			$('.alien').each(function(){
-				$(this).hide();
-			})
-			$('#scoreboard').hide();
-			$('#level').hide();
-			$('#menu').show();
-			numPlayers = 0;
-		})
+		if(winvariable===0){
+			$('.alien').hide();
+			$('.alien').finish();
+			$('.alien').removeClass('active oneHP twoHP threeHP');
+			player1active = 0;
+			player2active = 0;
+			$('#youwin').show();
+			$('#replay').on('click', function(){
+				$('#youwin').hide();
+				click.play();
+				if(numPlayers===1){
+					setup1();
+					inGameState();
+				}
+				if(numPlayers===2){
+					setup2();
+					inGameState();
+				}
+			});
+			$('#tomenu').on('click', function(){
+				$('#youwin').hide();
+				click.play();
+				$('.lives1').hide();
+				$('.lives2').hide();
+				$('#left').hide();
+				$('#right').hide();
+				$('#ship1').hide();
+				$('#ship2').hide();
+				$('.alien').each(function(){
+					$(this).hide();
+				})
+				$('#scoreboard').hide();
+				$('#level').hide();
+				$('#menu').show();
+				numPlayers = 0;
+			});
+		}
 	}
 	//you lose
 	function gameOver() {
+		winvariable=1;
 		$('.alien').hide();
 		$('.alien').finish();
 		$('.alien').removeClass("active oneHP twoHP threeHP");
