@@ -19,16 +19,41 @@ body{
 	top:20%;
 	left: 30%;
 	width: 40%;
-	height: 220px;
+	height: 250px;
 	background: grey;
 	border: 3px solid #00ffff;
 	border-radius: 3%;
+}
+#fwdback{
+	position: relative;
+	width: 100%;
+	height: 15%;
 }
 #gotit:hover{
 	color: #00ff00;
 }
 #gotit{
-	top: 80%;
+	padding: 10px;
+	position: relative;
+	float: right;
+}
+#back:hover{
+	color: #00ffff;
+}
+#back{
+	padding: 10px;
+	position: relative;
+	float: left;
+}
+#arrowkeys{
+	position: relative;
+	width:40%;
+	left: 30%;
+}
+#double{
+	position: relative;
+	width:80%;
+	left: 10%;
 }
 h2{
 	font-family: 'Sigmar One';
@@ -79,6 +104,25 @@ h3 {
 	color: #00ff00;
 }
 #mainmenu:hover{
+	color: #00ffff;
+}
+
+#youwin{
+	position: relative;
+	top: 20%;
+	left: 30%;
+	width: 40%;
+	height: 180px;
+	background: grey;
+	border: 3px solid #00ffff;
+	border-radius: 3%;
+	z-index: 3;
+}
+
+#replay:hover{
+	color: #00ff00;
+}
+#tomenu:hover{
 	color: #00ffff;
 }
 

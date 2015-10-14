@@ -14,12 +14,13 @@
 			<p class="audioNo">Your browser does not support the <code>audio</code> element.</p>
 		</audio>
 
-		<audio id="lasersound" src="music_sound_effects/laser_sound.wav">
+		<audio id="lasersound" src="music_sound_effects/laser_sound.mp3">
 			<p class="audioNo">Your browser does not support the <code>audio</code> element.</p>
 		</audio> 
 
-		<audio id="boom" src="music_sound_effects/boom.wav"></audio>
-		<audio id="click" src="music_sound_effects/click.wav"></audio>
+		<audio id="boom" src="music_sound_effects/boom.mp3"></audio>
+		<audio id="click" src="music_sound_effects/click.mp3"></audio>
+		<audio id="hit" src="music_sound_effects/hit.mp3"></audio>
 	</div>
 
 
@@ -43,17 +44,26 @@
 
 		<div id="controls" hidden>
 			<h2>Controls</h2>
-			<div "arrow keys"></div>
-			<i class="fa fa-caret-square-o-up"></i>
-
-			<h3 id="gotit">Got it</h3>
+				<img id="arrowkeys" src="images/controls.png">
+				<img id="double" src="images/double.png">
+			<div id="fwdback">
+				<h3 id="back">Back</h3>
+				<h3 id="gotit">Play</h3>
+			</div>
 		</div>
 
 		<!-- Game Over -->
 		<div id="gameover" hidden>
 			<h2 id="endgame">Game Over!</h2>
-			<h3 id="tryagain">Try Again</h3>
+			<h3 id="tryagain">Play Again</h3>
 			<h3 id="mainmenu">Main Menu</h3>
+		</div>
+
+		<!-- Victory -->
+		<div id="youwin" hidden>
+			<h2>YOU WIN!</h2>
+			<h3 id="replay">Play Again</h3>
+			<h3 id="tomenu">Main Menu</h3>
 		</div>
 
 		<!-- Player 1 and Player 2 ships -->
@@ -64,7 +74,7 @@
 			<img class="player" src="images/player2_ship.png">
 		</div>
 
-		<!-- Creates the first 3 aliens -->
+		<!-- Creates the 10 aliens -->
 		<div id="a1" class="alien">
 			<img class="alien1" src="images/alien1.png">
 		</div>
@@ -74,9 +84,27 @@
 		<div id="a3" class="alien">
 			<img class="alien1" src="images/alien1.png">
 		</div>
-
-		<!-- Power-ups -->
-		<div id="speed" class="powerups"><i class="fa fa-bolt fa-2x"></i></div>
+		<div id="a4" class="alien">
+			<img class="alien1" src="images/alien1.png">
+		</div>
+		<div id="a5" class="alien">
+			<img class="alien1" src="images/alien1.png">
+		</div>
+		<div id="a6" class="alien">
+			<img class="alien1" src="images/alien1.png">
+		</div>
+		<div id="a7" class="alien">
+			<img class="alien1" src="images/alien1.png">
+		</div>
+		<div id="a8" class="alien">
+			<img class="alien1" src="images/alien1.png">
+		</div>
+		<div id="a9" class="alien">
+			<img class="alien1" src="images/alien1.png">
+		</div>
+		<div id="a10" class="alien">
+			<img class="alien1" src="images/alien1.png">
+		</div>
 
 	</div>
 
