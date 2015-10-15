@@ -199,8 +199,11 @@ $('document').ready(function(){
 			}
 		}
 	});
-		
-	//appends a new "laser" div at the position of ship 1
+
+	//  The firing method was inspired by Alex Turpin's 
+	//  	answer to this stackoverflow question:
+	//  http://stackoverflow.com/questions/7823192/fire-a-bullet-with-jquery-javascript
+	//  appends a new "laser" div at the position of ship 1
 	function fire1(){
 		if(player1active===1){
 			var x = $('#ship1').position();
