@@ -5,7 +5,7 @@ $('document').ready(function(){
 	var click = document.getElementById("click");
 	var boom = document.getElementById("boom");
 	var hit = document.getElementById("hit");
-	spacemen.volume = 0.9;
+	spacemen.volume = 0.6;
 	click.volume = 0.4;
 	laser_sound.volume = 0.4;
 	boom.volume = 0.15;
@@ -21,12 +21,14 @@ $('document').ready(function(){
 			click.volume = 0.0;
 			boom.volume = 0.0;
 			effects_volume = 0;
+			hit.volume = 0.0;
 		}else{
 			$('#effectsVol').css({color: "#00ffff"});
 			laser_sound.volume = 0.2;
 			click.volume = 0.2;
 			boom.volume = 0.05;
 			effects_volume = 1;
+			hit.volume = 0.2;
 		}
 	});
 	$('#musicVol').on('click', function(){
@@ -49,7 +51,7 @@ $('document').ready(function(){
 	var player2Lives = 3;
 	var speed1 = 5;	
 	var speed2 = 5;
-	var laser_speed = 20; 
+	var laser_speed = 30; 
 	var regenerating1 = 0; 
 	var regenerating2 = 0;
 	var winvariable = 0; 
@@ -104,7 +106,7 @@ $('document').ready(function(){
 	//This sets up single player mode
 	function setup1(){
 		score = 0;
-		speed1 = 5;
+		speed1 = 7;
 		player1Lives = 3;
 		player1active = 1;
 		$('.alien').removeClass("active oneHP twoHP threeHP")
@@ -115,8 +117,8 @@ $('document').ready(function(){
 	// This sets up team mode
 	function setup2(){
 		score = 0;
-		speed1 = 5;
-		speed2 = 5;
+		speed1 = 7;
+		speed2 = 7;
 		player1Lives = 3;
 		player2Lives = 3;
 		player1active = 1;

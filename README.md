@@ -1,10 +1,13 @@
 # Space Invasion
-This is a retro space-themed game created by Alec McGovern during the Web Development Immersive, fall 2015 through General Assembly.  
+Space Invasion is a retro styled space-themed game for use in Google Chrome.  
 
-Controls:  Arrow keys to move and Spacebar to fire --- Player 1
-			"WASD" keys to move and Shift to fire --- Player 2
+Controls:  Arrow keys and Spacebar --- Player 1
+			"WASD" keys and Shift --- Player 2
 
-Chrome strongly recommended.  Audio latency issues in Safari.  Firefox seems to work, although has not been thoroughly tested.  IE not tested.
+Chrome strongly recommended.  
+Audio latency issues in Safari.  
+Firefox 'lost spaceship' issues.  Lag.  
+IE not tested.
 
 #Technologies used:
 -html
