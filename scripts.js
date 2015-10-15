@@ -5,7 +5,7 @@ $('document').ready(function(){
 	var click = document.getElementById("click");
 	var boom = document.getElementById("boom");
 	var hit = document.getElementById("hit");
-	spacemen.volume = 1.0;
+	spacemen.volume = 0.9;
 	click.volume = 0.4;
 	laser_sound.volume = 0.4;
 	boom.volume = 0.15;
@@ -61,12 +61,12 @@ $('document').ready(function(){
 		$('.menuhide').hide();
 		$('.alien').hide();
 		$('#menu').show();
-		$('#solo').on('click', function(){ //if 'Solo' mode chosen
+		$('#solobutton').on('click', function(){ //if 'Solo' mode chosen
 			click.play();
 			numPlayers = 1;
 			controlsState();
 		})
-		$('#team').on('click', function(){ //if 'Team' mode chosen
+		$('#teambutton').on('click', function(){ //if 'Team' mode chosen
 			click.play();
 			numPlayers = 2;
 			controlsState();
