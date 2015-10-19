@@ -5,6 +5,7 @@ body{
 
 /*Starting Menu*/
 #menu{
+	overflow: auto;
 	position: relative;
 	top:20%;
 	left: 30%;
@@ -14,7 +15,18 @@ body{
 	border: 3px solid #00ffff;
 	border-radius: 3%;
 }
-
+#aftermenu{
+	clear:both;
+}
+#aftercontrols{
+	clear: both;
+}
+#aftergameover{
+	clear:both;
+}
+#afteryouwin{
+	clear: both;
+}
 
 
 h2{
@@ -75,13 +87,6 @@ h3 {
 	border: 5px solid darkgrey;
 	border-radius: 4px;
 }
-#solo:hover{
-	/*color: #00ff00;*/
-}
-#team:hover{
-	/*color: #00ffff;*/
-}
-
 #solo{
 	position: relative;
 	margin: 0 auto;
@@ -106,6 +111,7 @@ h3 {
 
 /*Controls menu*/
 #controls{ 
+	overflow: auto;
 	position: relative;
 	top:20%;
 	left: 30%;
@@ -148,8 +154,9 @@ h3 {
 }
 
 
-/*Game over menu*/
+/*Game over and you win menus*/
 #gameover{
+	overflow: auto;
 	position: relative;
 	top:20%;
 	left: 30%;
@@ -168,6 +175,7 @@ h3 {
 }
 
 #youwin{
+	overflow: auto;
 	position: relative;
 	top: 20%;
 	left: 30%;
