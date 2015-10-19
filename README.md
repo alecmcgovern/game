@@ -1,5 +1,5 @@
 # Space Invasion
-Space Invasion is a retro styled space-themed game for use in Google Chrome.  
+Space Invasion is a retro styled space-themed game for use in Google Chrome. Not mobile compatible. 
 
 ###Controls:  
 * Arrow keys and Spacebar  (Player 1)

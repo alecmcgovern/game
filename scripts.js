@@ -294,7 +294,6 @@ $('document').ready(function(){
 				alienPos.left < player1Pos.left + $('#ship1').width()){
 					if (regenerating1===0){
 						boom.play();
-						regenerating1=1;
 						$(this).removeClass("active oneHP twoHP threeHP");																							
 						$(this).stop(true).empty();
 						$(this).append("<img class='alien1' src='images/explosion.png'>");
@@ -310,7 +309,6 @@ $('document').ready(function(){
 					alienPos.left < player2Pos.left + $('#ship2').width()){
 						if(regenerating2===0){
 							boom.play();
-							regenerating2=1;
 							$(this).removeClass("active oneHP twoHP threeHP");
 							$(this).hide();
 							$(this).stop(true).empty();
@@ -325,6 +323,7 @@ $('document').ready(function(){
 
 	//This takes away a life when player 1's ship is hit
 	function player1LifeLoss () {
+		regenerating1=1;
 		if(player1Lives===3){
 			$('#life11').hide();
 			player1Lives=2;
@@ -346,14 +345,15 @@ $('document').ready(function(){
 
 		setTimeout(clear, 2000); //time spent regenerating
 		function clear() {
+			regenerating1 = 0;
 			clearInterval(handle);
 			$('#ship1').css('opacity', '1');
-			regenerating1 = 0;
 		}
 	}
 
 	//This takes away a life when player 2's ship is hit
 	function player2LifeLoss (){
+		regenerating2=1;
 		if(player2Lives===3){
 			$('#life21').hide();
 			player2Lives=2;
@@ -375,9 +375,9 @@ $('document').ready(function(){
 
 		setTimeout(clear2, 2000); //time spent regenerating
 		function clear2() {
+			regenerating2 = 0;
 			clearInterval(handle);
 			$('#ship2').css('opacity', '1');
-			regenerating2 = 0;
 		}	
 	}
 
