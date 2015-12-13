@@ -1,13 +1,15 @@
 # Space Invasion
 Space Invasion is a retro styled space-themed game for use in Google Chrome. Not mobile compatible. 
 
+Play it here: http://alecmcgovern.github.io/game/
+
 ###Controls:  
 * Arrow keys and Spacebar  (Player 1)
 * "WASD" keys and Shift (Player 2)
 
 Chrome strongly recommended.  
 Audio latency issues in Safari.  
-Firefox 'lost spaceship' issues.  Lag.  
+Firefox occasional lag.  
 IE not tested.
 
 ###Technologies used:
