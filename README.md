@@ -10,7 +10,7 @@ Play it here:  http://alecmcgovern.github.io/game/
 
 Chrome strongly recommended.  
 Audio latency issues in Safari.  
-Firefox 'lost spaceship' issues.  Lag.  
+Firefox Lag.  
 IE not tested.
 
 ###Technologies used:
