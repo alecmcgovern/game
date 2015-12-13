@@ -339,7 +339,9 @@ $('document').ready(function(){
 		var handle = setInterval(function(){
 			$('#ship1').css('opacity', '1');
 			setTimeout(function(){
-				$('#ship1').css('opacity', '0');
+				if(regenerating1===1){
+					$('#ship1').css('opacity', '0');
+				}
 			}, 200);
 		}, 400);
 
@@ -369,7 +371,9 @@ $('document').ready(function(){
 		var handle = setInterval(function(){
 			$('#ship2').css('opacity', '1');
 			setTimeout(function(){
-				$('#ship2').css('opacity', '0');
+				if(regenerating2===1){
+					$('#ship2').css('opacity', '0');
+				}
 			}, 200);
 		}, 400);
 
