@@ -7,10 +7,7 @@ Play it here: http://alecmcgovern.github.io/game/
 * Arrow keys and Spacebar  (Player 1)
 * "WASD" keys and Shift (Player 2)
 
-Chrome strongly recommended.  
-Audio latency issues in Safari.  
-Firefox occasional lag.  
-IE not tested.
+Works best in Chrome
 
 ###Technologies used:
 * html

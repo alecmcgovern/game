@@ -47,16 +47,7 @@ h3 {
 #teambutton:hover{
 	color: #00ffff;
 }
-#solooutline:hover{
-	border: 4px solid #00ff00;
-	border-radius: 4px;
-	background: #00ff00;
-}
-#teamoutline:hover{
-	border: 4px solid #00ffff;
-	border-radius: 4px;
-	background: #00ffff;
-}
+
 #solooutline{
 	position: relative;
 	float: left;
@@ -71,22 +62,31 @@ h3 {
 }
 
 #solobutton{
-	background: grey;
-	position: relative;
 	float: left;
-	width:94%;
-	border: 5px solid darkgrey;
-	border-radius: 4px;
-	
 }
+
 #teambutton{
+	float: right;
+}
+
+#solobutton, #teambutton {
 	background: grey;
 	position: relative;
-	float: right;
 	width:94%;
 	border: 5px solid darkgrey;
 	border-radius: 4px;
+	cursor: pointer;
 }
+
+#solobutton:hover {
+	border-color: #00ff00;
+}
+#teambutton:hover {
+	border-color: #00ffff;
+}
+
+
+
 #solo{
 	position: relative;
 	margin: 0 auto;
@@ -129,17 +129,19 @@ h3 {
 #gotit:hover{
 	color: #00ff00;
 }
-#gotit{
+
+#gotit, #back {
 	padding: 10px;
 	position: relative;
+	cursor: pointer;
+}
+#gotit{
 	float: right;
 }
 #back:hover{
 	color: #00ffff;
 }
 #back{
-	padding: 10px;
-	position: relative;
 	float: left;
 }
 #arrowkeys{
@@ -167,6 +169,11 @@ h3 {
 	border-radius: 3%;
 	z-index: 3;
 }
+
+#tryagain, #mainmenu, #replay, #tomenu {
+	cursor: pointer;
+}
+
 #tryagain:hover{
 	color: #00ff00;
 }
@@ -370,11 +377,14 @@ footer{
 	position: relative;
 	color: white;
 }
-#effectsVol{
+
+#effectsVol, #musicVol {
 	padding: 10px;
+	cursor: pointer;
+}
+#effectsVol{
 	color: #00ffff;
 }
 #musicVol{
-	padding: 10px;
 	color: #00ff00;
 }
